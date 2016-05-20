@@ -1,0 +1,14 @@
+Package: cdkdepict
+Type: Package
+Title: Simple Wrapper for the CDK Depict App
+Version: 0.1.0
+Author: Zach Charlop-Powers <zach.charlop.powers@gmail.com>
+Maintainer: Zach Charlop-Powers <zach.charlop.powers@gmail.com>
+Description: For rapid generation of small molecule figures using
+    CDK's Depict Api
+License: What license is it under?
+LazyData: TRUE
+Depends:
+    rcdk (>= 3.3.5),
+    rcdklibs (>= 1.5.13)
+RoxygenNote: 5.0.1
