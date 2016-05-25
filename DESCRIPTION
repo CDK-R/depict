@@ -6,7 +6,7 @@ Author: Zach Charlop-Powers <zach.charlop.powers@gmail.com>
 Maintainer: Zach Charlop-Powers <zach.charlop.powers@gmail.com>
 Description: For rapid generation of small molecule figures using
     CDK's Depict Api
-License: What license is it under?
+License: LGPL
 LazyData: TRUE
 Depends:
     rcdk (>= 3.3.5),

@@ -7,15 +7,19 @@
 #' @examples
 #' mols <- rcdk::parse.smiles("CCC1CCCNNNCCCC1NCN")
 #' mol <- mols[[1]]
-#' depict(mol, molfile="example1.png",zoom=4)
+#' depict(mol, imgoutfile="example1.png",zoom=4)
 #'
-depict <- function(mol, molfile,sizex=NULL, sizey=NULL, type="png",
+depict <- function(mol, imgoutfile,
+                   sizex=NULL,
+                   sizey=NULL,
+                   type="png",
                    atomcolors=TRUE,
                    moltitle=TRUE,
                    outerglow=TRUE,
-                   terminalcarbons = TRUE,
+                   terminalcarbons = FALSE,
                    zoom=1) {
 
+  # check to see if mols are
   DepictionGenerator <- J("org.openscience.cdk.depict.DepictionGenerator")
 
   dg <- new(DepictionGenerator)
@@ -30,7 +34,7 @@ depict <- function(mol, molfile,sizex=NULL, sizey=NULL, type="png",
 
   dg <- dg$withZoom(zoom)
 
-  #depict the mol
-  dg$depict(mol)$writeTo(molfile)
+  # draw the mol
+  dg$depict(mol)$writeTo(imgoutfile)
 }
 
