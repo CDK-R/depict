@@ -32,7 +32,7 @@ caffeine   <- parse.smiles(cafsmiles$caffeine)[[1]]
 penicillin <- parse.smiles(cafsmiles$penicillin)[[1]]
 
 # depict
-depict(caffeine,imgoutfile = "images/caffeine.png")
+depict(caffeine,  imgoutfile = "images/caffeine.png")
 depict(penicillin,imgoutfile = "images/penicillin.png")
 ```
 

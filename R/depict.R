@@ -2,7 +2,8 @@
 #'
 #' Use CDK's depict module to draw a molecule
 #'
-#' @param mol a CDK AtomContainer
+#' @param mol Required. a CDK AtomContainer
+#' @param imgoutfile Required. Filepath for outpur string
 #' @export
 #' @examples
 #' mols <- rcdk::parse.smiles("CCC1CCCNNNCCCC1NCN")
