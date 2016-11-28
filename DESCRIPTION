@@ -9,6 +9,7 @@ Description: For rapid generation of small molecule figures using
 License: LGPL
 LazyData: TRUE
 Depends:
-    rcdk (>= 3.3.5),
+    rcdk (>= 3.3.8),
     rcdklibs (>= 1.5.13)
+Suggests: webchem
 RoxygenNote: 5.0.1
