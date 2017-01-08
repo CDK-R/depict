@@ -8,6 +8,7 @@ Description: For rapid generation of small molecule figures using
 License: LGPL
 LazyData: TRUE
 Depends:
+    rJava (>= 0.9-8),
     rcdk (>= 3.3.8),
     rcdklibs (>= 1.5.13)
 Suggests: webchem
