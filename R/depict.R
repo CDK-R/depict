@@ -94,8 +94,9 @@ depict <- function(dg, mol) {
     stop("depict requires a Depiction Generator")
   }
 
-  if (!checkJavaClass(mol, "org/openscience/cdk/AtomContainer")) {
-    stop("depict requires a Depiction Generator")
+  if (!checkJavaClass(mol, c("org/openscience/cdk/AtomContainer",
+                             "org/openscience/cdk/silent/AtomContainer"))) {
+    stop("depict requires an AtomContainer")
   }
 
   dg$depict(mol)
