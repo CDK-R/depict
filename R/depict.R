@@ -58,8 +58,7 @@ add_title <- function(dg) {
 }
 #' add terminal carbons
 #'
-#' @param dg
-#' @param a Depiction Generator
+#' @param dg a Depiction Generator
 #' @export
 add_terminal_carbons <- function(dg) {
   if (!checkJavaClass(dg, "org/openscience/cdk/depict/DepictionGenerator")) {
@@ -128,4 +127,45 @@ save_image <- function(molgrid, filepath) {
     stop("highlight_atoms requires a Depiction Generator")
   }
   molgrid$writeTo(filepath)
+}
+
+#' get_image
+#'
+#' get image
+#'
+#' @param molgrid Required. A MolGridDepiction. Usually obtained from
+#' the \code{depict} function.
+#' @param outfile Required. Filepath to the output
+#' @importFrom png readPNG
+#' @export
+#'
+get_image <- function(molgrid) {
+  if (!checkJavaClass(molgrid, "org/openscience/cdk/depict/MolGridDepiction")) {
+    stop("highlight_atoms requires a Depiction Generator")
+  }
+
+  # CDK apends a ".png" to the name
+  output <- paste(tempfile(),"png")
+  output1 <-paste0(output,".png")
+
+  molgrid$writeTo("png", output)
+  img <- readPNG(output1)
+
+  unlink(output)
+  img
+}
+#' set_zoom
+#'
+#' set_zoom
+#'
+#' @param dg a Depiction Generator
+#' @param zoom Optional. Default \code{1}
+#' @importFrom png readPNG
+#' @export
+#'
+set_zoom <- function(dg, zoom=1) {
+  if (!checkJavaClass(dg, "org/openscience/cdk/depict/DepictionGenerator")) {
+    stop("highlight_atoms requires a Depiction Generator")
+  }
+  dg$withZoom(zoom)
 }
