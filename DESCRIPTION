@@ -1,9 +1,9 @@
-Package: cdkdepict
+Package: depict
 Type: Package
-Title: Simple Wrapper for the CDK Depict App
+Title: Draw Beautiful Moleculear Structures
 Version: 0.1.0
 Authors@R: c(person('Zachary', 'Charlop-Powers', role=c('cre','aut',"cph"), email='zach.charlop.powers@gmail.com'))
-Description: For rapid generation of small molecule figures using
+Description: For rapid generation of small molecule figures using the CDK Depiciton API.
     CDK's Depict Api
 License: LGPL
 LazyData: TRUE
@@ -11,5 +11,7 @@ Depends:
     rJava (>= 0.9-8),
     rcdk (>= 3.3.8),
     rcdklibs (>= 1.5.13)
-Suggests: webchem
+Imports:
+    png,
+    magrittr
 RoxygenNote: 5.0.1

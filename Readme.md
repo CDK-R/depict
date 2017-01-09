@@ -1,64 +1,93 @@
----
-title: "Readme.RMD"
-author: "zachcp"
-date: "May 19, 2016"
-output: html_document
----
 
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+depict
+======
 
+depict is an R wrapper around the wonderful depiction api written by [John May](https://github.com/johnmay). The entire [CDK](https://github.com/cdk) team, but especially John, have been steadily improving the visualization features of CDK. The depiction API is succinct and powerful and provides access to a vary large amount of the end-user desired functionality with a small number of composable functions. Because of the design of this API it is now relatively straightforward to design a simple streamlined interface to allow users to quickly and easily generate beautiful graphics.
 
-## CDK Depict 
+Installation
+------------
 
-A simple wrapper around rcdk's excellent depict module.
+You can install depict from github with:
 
+``` r
+# install.packages("devtools")
+devtools::install_github("zachcp/cdk-depict")
+```
 
-```r
-library(webchem)
-library(rcdk)
+Example
+-------
+
+Simple Depiciton
+----------------
+
+A simple wrapper around cdk's excellent depict module.
+
+``` r
 library(cdkdepict)
+library(magrittr)
+library(grid)
+
+# you must supply java colors 
+color <- J("java.awt.Color")
+
+# load in penicillin
+pen  <- parse_smiles("CC1(C(N2C(S1)C(C2=O)NC(=O)CC3=CC=CC=C3)C(=O)[O-])C")
+cav  <- parse_smiles("CN1C=NC2=C1C(=O)N(C(=O)N2C)C")
+
+# define the regions to highlight
+# either all atoms/bonds
+# or a SMARTS-defined subregion
+atms <- pen$atoms()
+bnds <- pen$bonds()
+lactam <- match_smarts("C1(=O)NCC1", pen)
+
+# use piping to change the behavior as desired
+depiction() %>%
+  highlight_atoms(atms, color$LIGHT_GRAY) %>%
+  highlight_atoms(bnds, color$LIGHT_GRAY) %>%
+  highlight_atoms(lactam, color$RED) %>%
+  set_size(400, 400) %>%
+  set_zoom(3) %>%
+  outerglow() %>%
+  depict(pen) %>%
+  get_image() %>%
+  grid::grid.raster()
 ```
 
-## Basic Depiction 
+![](README-unnamed-chunk-2-1.png)
 
-You can also embed plots, for example:
+A Larger Example
+----------------
 
+``` r
+insulinmol <- system.file("molfiles/ChEBI_5931.mol", package="depict")
+insulin    <- read_mol(insulinmol)
 
-```r
-# get a few smiles by name
-cafsmiles  <- webchem::cir_query(c("caffeine","penicillin"), representation = "smiles")
+cysteine <- match_smarts("C(=O)C(CS)N", insulin)
+xlinks   <- match_smarts("SS", insulin)
 
-# parse the smiles into CDK AtomContainers
-caffeine   <- parse.smiles(cafsmiles$caffeine)[[1]]
-penicillin <- parse.smiles(cafsmiles$penicillin)[[1]]
-
-# depict
-depict(caffeine,molfile = "images/caffeine.png")
-depict(penicillin,molfile = "images/penicillin.png")
+dp <- depiction()%>% 
+  set_size(700, 400) %>%
+  set_zoom(10) %>%
+  outerglow() %>%
+  highlight_atoms(cysteine, color$YELLOW) %>%
+  highlight_atoms(xlinks, color$YELLOW) %>%
+  depict(insulin) %>%
+  get_image() %>%
+  grid::grid.raster()
 ```
 
-![](images/caffeine.png)
-![](images/penicillin.png)
+![](README-unnamed-chunk-3-1.png)
 
+Coding notes
+------------
 
-### Change the Zoom Level
+A few notes about setup:
 
-
-```r
-depict(caffeine,  zoom=2, molfile = "images/caffeine_zoom.png")
-depict(penicillin,zoom=2, molfile = "images/penicillin_zoom.png")
-```
-![](images/caffeine_zoom.png)
-![](images/penicillin_zoom.png)
-
-
-### Remove the Color
-
-
-```r
-depict(caffeine,  atomcolors = FALSE, molfile = "images/caffeine_BW.png")
-depict(penicillin,atomcolors = FALSE, molfile = "images/penicillin_BW.png")
-```
-
-![](images/caffeine_BW.png)
-![](images/penicillin_BW.png)
-
+1.  Java can be touch on OSX in particular. When in doubt try `sudo R CMD javareconf` and reinstall rJava from source.
+2.  Currently I am using the `$` operator in just about all of my functions. This makes it about a billion times easier and more succinct to code at the price of performance. If performance becomes an issue we can use low-level calls. If its important to you I'm happy to accept pull requests.
+3.  The API is still in flux. I am currently happy with the design but there are a few areas where I'd like to kick the tires a bit more - especially in regards to selection.
+4.  java.awt.colors are a bit tough to warp since there are many arities and classes accepted.. I think I will provide a number of colors.
+5.  SMARTS selectors. common smarts selections for AminoAcids, Nucleic Acids, Sugars may be worth including as well.
+6.
