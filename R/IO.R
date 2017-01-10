@@ -30,7 +30,7 @@ parse_smiles <- function(smi, generatecoords=TRUE) {
 
 #' read_mol
 #'
-#' Read a Molfile and return an AtomContainer Object
+#' Read a Molfile and return an AtomContainer
 #'
 #' @param molfile Required. A filepath to a MOLfile.
 #' @return an AtomContainer
