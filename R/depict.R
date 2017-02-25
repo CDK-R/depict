@@ -4,8 +4,7 @@
 #'
 #' @export
 depiction <- function() {
-  DepictionGenerator <- J("org/openscience/cdk/depict/DepictionGenerator")
-  new(DepictionGenerator)
+  .jnew("org/openscience/cdk/depict/DepictionGenerator")
 }
 #' color atoms
 #'
@@ -15,8 +14,7 @@ color_atoms <- function(dg) {
   if (!checkJavaClass(dg, "org/openscience/cdk/depict/DepictionGenerator")) {
     stop("color_atoms requires a Depiction Generator")
   }
-
-  dg$withAtomColors()
+  .jcall(dg, "Lorg/openscience/cdk/depict/DepictionGenerator;", "withAtomColors")
 }
 #' outerglow
 #'
@@ -27,8 +25,7 @@ outerglow <- function(dg) {
   if (!checkJavaClass(dg, "org/openscience/cdk/depict/DepictionGenerator")) {
     stop("outerglow requires a Depiction Generator")
   }
-
-  dg$withOuterGlowHighlight()
+  .jcall(dg, "Lorg/openscience/cdk/depict/DepictionGenerator;", "withOuterGlowHighlight")
 }
 #' set_size
 #'
@@ -41,6 +38,7 @@ set_size <- function(dg, width, height) {
   if (!checkJavaClass(dg, "org/openscience/cdk/depict/DepictionGenerator")) {
     stop("set_size requires a Depiction Generator")
   }
+
   dg$withSize(width,height)
 }
 #' add_title
@@ -53,7 +51,7 @@ add_title <- function(dg) {
   if (!checkJavaClass(dg, "org/openscience/cdk/depict/DepictionGenerator")) {
     stop("add_title requires a Depiction Generator")
   }
-
+  withSize
   dg$withMolTitle()
 }
 #' add terminal carbons
@@ -64,8 +62,7 @@ add_terminal_carbons <- function(dg) {
   if (!checkJavaClass(dg, "org/openscience/cdk/depict/DepictionGenerator")) {
     stop("add_terminal_carbons requires a Depiction Generator")
   }
-
-  dg$withTerminalCarbons()
+  .jcall(dg, "Lorg/openscience/cdk/depict/DepictionGenerator;", "withTerminalCarbons")
 }
 
 #' zoom
@@ -97,8 +94,7 @@ depict <- function(dg, mol) {
                              "org/openscience/cdk/silent/AtomContainer"))) {
     stop("depict requires an AtomContainer")
   }
-
-  dg$depict(mol)
+  .jcall(dg, "Lorg/openscience/cdk/depict/Depiction;", "depict", mol)
 }
 #' highlight_atoms
 #'
@@ -145,13 +141,15 @@ get_image <- function(molgrid) {
   }
 
   # CDK apends a ".png" to the name
-  output <- paste(tempfile(),"png")
-  output1 <-paste0(output,".png")
+  output  <- paste(tempfile(),"png")
+  output1 <- paste0(output,".png")
 
   molgrid$writeTo("png", output)
   img <- readPNG(output1)
 
   unlink(output)
+  unlink(output1)
+
   img
 }
 #' set_zoom

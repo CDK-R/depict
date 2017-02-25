@@ -36,15 +36,15 @@ parse_smiles <- function(smi, generatecoords=TRUE) {
 #' @return an AtomContainer
 #' @export
 read_mol <- function(molfile) {
-  jfile          <- J("java.io.File")
-  jfreader       <- J("java.io.FileReader")
+
   jAtomContainer <- J("org.openscience.cdk.AtomContainer")
-  jMDLreader     <- J("org.openscience.cdk.io.MDLV2000Reader")
 
-  jfileobj   <- new(jfile, molfile)
-  jreaderobj <- new(jfreader, jfileobj)
-  jmolreader <- new(jMDLreader, jreaderobj)
+  jfileobj   <- .jnew("java.io.File", molfile)
+  jreaderobj <- .jnew("java.io.FileReader", jfileobj)
+  jmolreader <- .jnew("org.openscience.cdk.io.MDLV2000Reader", jreaderobj)
+  AC         <- .jnew("org.openscience.cdk.AtomContainer")
 
-  jmolreader$read(new(jAtomContainer))
+  jmolreader$read(AC)
+
 }
 
