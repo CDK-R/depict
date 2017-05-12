@@ -12,7 +12,7 @@ You can install depict from github with:
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("zachcp/cdk-depict")
+devtools::install_github("zachcp/depict")
 ```
 
 Example
