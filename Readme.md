@@ -24,7 +24,7 @@ Simple Depiciton
 A simple wrapper around cdk's excellent depict module.
 
 ``` r
-library(cdkdepict)
+library(depict)
 library(magrittr)
 library(grid)
 
