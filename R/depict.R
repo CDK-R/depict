@@ -94,7 +94,8 @@ depict <- function(dg, mol) {
                              "org/openscience/cdk/silent/AtomContainer"))) {
     stop("depict requires an AtomContainer")
   }
-  .jcall(dg, "Lorg/openscience/cdk/depict/Depiction;", "depict", mol)
+  #.jcall(dg, "Lorg/openscience/cdk/depict/Depiction;", "depict", mol)
+  dg$depict(mol)
 }
 #' highlight_atoms
 #'
