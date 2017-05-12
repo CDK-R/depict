@@ -41,9 +41,10 @@ read_mol <- function(molfile) {
 
   jfileobj   <- .jnew("java.io.File", molfile)
   jreaderobj <- .jnew("java.io.FileReader", jfileobj)
-  jmolreader <- .jnew("org.openscience.cdk.io.MDLV2000Reader", jreaderobj)
+  jmolreader <- .jnew("org.openscience.cdk.io.MDLV2000Reader")
   AC         <- .jnew("org.openscience.cdk.AtomContainer")
 
+  jmolreader$setReader(jreaderobj)
   jmolreader$read(AC)
 
 }
