@@ -5,9 +5,10 @@
 #' @param smi Required. A smiles string
 #' @param generatecoords Optional. Default \code{TRUE}. Whether
 #'  to generate coordinates from the smiles
+#' @param kekulise Optional. Boolean. Default \code{TRUE}
 #' @export
 #'
-parse_smiles <- function(smi, generatecoords=TRUE) {
+parse_smiles <- function(smi, generatecoords=TRUE, kekulise=TRUE) {
 
   SmilesParser <- J("org.openscience.cdk.smiles.SmilesParser")
   SChemObjectBuilder <- J("org.openscience.cdk.silent.SilentChemObjectBuilder")
@@ -15,6 +16,8 @@ parse_smiles <- function(smi, generatecoords=TRUE) {
 
   sinst <- SChemObjectBuilder$getInstance()
   sp    <- new(SmilesParser, sinst)
+  sp$kekulise(kekulise)
+  
   mol   <- sp$parseSmiles(smi)
 
   if (generatecoords) {
