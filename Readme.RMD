@@ -25,7 +25,7 @@ You can install depict from github with:
 
 ```{r gh-installation, eval = FALSE}
 # install.packages("devtools")
-devtools::install_github("zachcp/cdk-depict")
+devtools::install_github("zachcp/depict")
 ```
 
 ## Example
@@ -41,7 +41,7 @@ suppressMessages(library(grid))
 
 A simple wrapper around cdk's excellent depict module.
 
-```{r warning=FALSE, message=FALSE}
+```{r warning=FALSE, message=FALSE, eval=FALSE}
 library(cdkdepict)
 library(magrittr)
 library(grid)
@@ -77,7 +77,7 @@ depiction() %>%
 ## A Larger Example
 
 
-```{r message=FALSE}
+```{r message=FALSE, eval=FALSE}
 insulinmol <- system.file("molfiles/ChEBI_5931.mol", package="depict")
 insulin    <- read_mol(insulinmol)
 
