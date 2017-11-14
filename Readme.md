@@ -12,7 +12,7 @@ You can install depict from github with:
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("zachcp/cdk-depict")
+devtools::install_github("zachcp/depict")
 ```
 
 Example
@@ -55,7 +55,7 @@ depiction() %>%
   grid::grid.raster()
 ```
 
-![](README-unnamed-chunk-2-1.png)
+![](man/figures/README-unnamed-chunk-2-1.png)
 
 A Larger Example
 ----------------
@@ -78,7 +78,7 @@ dp <- depiction()%>%
   grid::grid.raster()
 ```
 
-![](README-unnamed-chunk-3-1.png)
+![](man/figures/README-unnamed-chunk-3-1.png)
 
 Coding notes
 ------------
