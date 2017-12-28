@@ -32,7 +32,7 @@ devtools::install_github("zachcp/depict")
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-suppressMessages(library(cdkdepict))
+suppressMessages(library(depict))
 suppressMessages(library(magrittr))
 suppressMessages(library(grid))
 ```
@@ -42,7 +42,7 @@ suppressMessages(library(grid))
 A simple wrapper around cdk's excellent depict module.
 
 ```{r warning=FALSE, message=FALSE, eval=FALSE}
-library(cdkdepict)
+library(depict)
 library(magrittr)
 library(grid)
 
@@ -50,7 +50,7 @@ library(grid)
 color <- J("java.awt.Color")
 
 # load in penicillin
-pen  <- parse_smiles("CC1(C(N2C(S1)C(C2=O)NC(=O)CC3=CC=CC=C3)C(=O)[O-])C")
+pen  <- parse_smiles("CC1(C(N2C(S1)C(C2=O)NC(=O)CC3=CC=CC=C3)C(=O)[O-])C penicillin")
 cav  <- parse_smiles("CN1C=NC2=C1C(=O)N(C(=O)N2C)C")
 
 # define the regions to highlight
@@ -68,6 +68,7 @@ depiction() %>%
   set_size(400, 400) %>%
   set_zoom(3) %>%
   outerglow() %>%
+  add_title() %>%
   depict(pen) %>%
   get_image() %>%
   grid::grid.raster()
@@ -85,7 +86,7 @@ cysteine <- match_smarts("C(=O)C(CS)N", insulin)
 xlinks   <- match_smarts("SS", insulin)
 
 dp <- depiction()%>% 
-  set_size(700, 400) %>%
+  set_size(700, 400) %>%s
   set_zoom(10) %>%
   outerglow() %>%
   highlight_atoms(cysteine, color$YELLOW) %>%
