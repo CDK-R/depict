@@ -51,7 +51,7 @@ add_title <- function(dg) {
   if (!checkJavaClass(dg, "org/openscience/cdk/depict/DepictionGenerator")) {
     stop("add_title requires a Depiction Generator")
   }
-  withSize
+
   dg$withMolTitle()
 }
 #' add terminal carbons
