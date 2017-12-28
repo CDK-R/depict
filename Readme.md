@@ -32,7 +32,7 @@ library(grid)
 color <- J("java.awt.Color")
 
 # load in penicillin
-pen  <- parse_smiles("CC1(C(N2C(S1)C(C2=O)NC(=O)CC3=CC=CC=C3)C(=O)[O-])C")
+pen  <- parse_smiles("CC1(C(N2C(S1)C(C2=O)NC(=O)CC3=CC=CC=C3)C(=O)[O-])C penicillin")
 cav  <- parse_smiles("CN1C=NC2=C1C(=O)N(C(=O)N2C)C")
 
 # define the regions to highlight
@@ -50,12 +50,13 @@ depiction() %>%
   set_size(400, 400) %>%
   set_zoom(3) %>%
   outerglow() %>%
+  add_title() %>%
   depict(pen) %>%
   get_image() %>%
   grid::grid.raster()
 ```
 
-![](man/figures/README-unnamed-chunk-2-1.png)
+![](man/figures/penicillin_highlight.png)
 
 A Larger Example
 ----------------
@@ -78,7 +79,7 @@ dp <- depiction()%>%
   grid::grid.raster()
 ```
 
-![](man/figures/README-unnamed-chunk-3-1.png)
+![](man/figures/insulin.png)
 
 Coding notes
 ------------

@@ -75,6 +75,8 @@ depiction() %>%
 
 ```
 
+![](man/figures/penicillin_highlight.png)
+
 ## A Larger Example
 
 
@@ -86,7 +88,7 @@ cysteine <- match_smarts("C(=O)C(CS)N", insulin)
 xlinks   <- match_smarts("SS", insulin)
 
 dp <- depiction()%>% 
-  set_size(700, 400) %>%s
+  set_size(700, 400) %>%
   set_zoom(10) %>%
   outerglow() %>%
   highlight_atoms(cysteine, color$YELLOW) %>%
@@ -96,6 +98,9 @@ dp <- depiction()%>%
   grid::grid.raster()
 
 ```
+![](man/figures/insulin.png)
+
+ 
 
 
 ## Coding notes
