@@ -2,22 +2,15 @@
 % Please edit documentation in R/depict.R
 \name{depict}
 \alias{depict}
-\title{Draw A Molecule and Write it to File}
+\title{depict}
 \usage{
-depict(mol, molfile, sizex = NULL, sizey = NULL, type = "png",
-  atomcolors = TRUE, moltitle = TRUE, outerglow = TRUE,
-  terminalcarbons = TRUE, zoom = 1)
+depict(dg, mol)
 }
 \arguments{
-\item{mol}{a CDK AtomContainer}
+\item{dg}{Required. A Depiction Generator}
+
+\item{mol}{Required. An AtomContainer}
 }
 \description{
-Use CDK's depict moduel to draw a molecule
+depict a molecule using the depiction generator.
 }
-\examples{
-mols <- rcdk::parse.smiles("CCC1CCCNNNCCCC1NCN")
-mol <- mols[[1]]
-depict(mol, molfile="example1.png",zoom=4)
-
-}
-
