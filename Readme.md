@@ -1,29 +1,38 @@
+---
+output: github_document
+---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-depict
-======
 
-depict is an R wrapper around the wonderful depiction api written by [John May](https://github.com/johnmay). The entire [CDK](https://github.com/cdk) team, but especially John, have been steadily improving the visualization features of CDK. The depiction API is succinct and powerful and provides access to a vary large amount of the end-user desired functionality with a small number of composable functions. Because of the design of this API it is now relatively straightforward to design a simple streamlined interface to allow users to quickly and easily generate beautiful graphics.
 
-Installation
-------------
+
+# depict
+
+depict is an R wrapper around the wonderful depiction api written by [John May](https://github.com/johnmay).  The entire [CDK](https://github.com/cdk) team, but especially
+John, have been steadily improving the visualization features of CDK. The depiction API is
+succinct and powerful and provides access to a vary large amount of the end-user desired functionality with a small number of composable functions. Because of the design of this API
+it is now relatively straightforward to design a simple streamlined interface to allow users to quickly and easily generate beautiful graphics.
+
+## Installation
 
 You can install depict from github with:
 
-``` r
+
+```r
 # install.packages("devtools")
-devtools::install_github("zachcp/depict")
+devtools::install_github("CDK-R/depict")
 ```
 
-Example
--------
+## Example
 
-Simple Depiciton
-----------------
+
+
+## Simple Depiciton
 
 A simple wrapper around cdk's excellent depict module.
 
-``` r
+
+```r
 library(depict)
 library(magrittr)
 library(grid)
@@ -54,14 +63,16 @@ depiction() %>%
   depict(pen) %>%
   get_image() %>%
   grid::grid.raster()
+
 ```
 
 ![](man/figures/penicillin_highlight.png)
 
-A Larger Example
-----------------
+## A Larger Example
 
-``` r
+
+
+```r
 insulinmol <- system.file("molfiles/ChEBI_5931.mol", package="depict")
 insulin    <- read_mol(insulinmol)
 
@@ -77,18 +88,20 @@ dp <- depiction()%>%
   depict(insulin) %>%
   get_image() %>%
   grid::grid.raster()
-```
 
+```
 ![](man/figures/insulin.png)
 
-Coding notes
-------------
+ 
+
+
+## Coding notes
 
 A few notes about setup:
 
-1.  Java can be touch on OSX in particular. When in doubt try `sudo R CMD javareconf` and reinstall rJava from source.
-2.  Currently I am using the `$` operator in just about all of my functions. This makes it about a billion times easier and more succinct to code at the price of performance. If performance becomes an issue we can use low-level calls. If its important to you I'm happy to accept pull requests.
-3.  The API is still in flux. I am currently happy with the design but there are a few areas where I'd like to kick the tires a bit more - especially in regards to selection.
-4.  java.awt.colors are a bit tough to warp since there are many arities and classes accepted.. I think I will provide a number of colors.
-5.  SMARTS selectors. common smarts selections for AminoAcids, Nucleic Acids, Sugars may be worth including as well.
-6.
+1. Java can be touch on OSX in particular. When in doubt try `sudo R CMD javareconf` and reinstall rJava from source.
+2. Currently I am using the `$` operator in just about all of my functions. This makes it about a billion times easier and more succinct to code at the price of performance. If performance becomes an issue we can use low-level calls. If its important to you I'm happy to accept pull requests.
+3. The API is still in flux. I am currently happy with the design but there are a few areas where I'd like to kick the tires a bit more - especially in regards to selection.
+4. java.awt.colors are a bit tough to warp since there are many arities and classes accepted.. I think I will provide a number of colors.
+5. SMARTS selectors. common smarts selections for AminoAcids, Nucleic Acids, Sugars may be worth including as well.
+5. 
