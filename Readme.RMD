@@ -25,7 +25,7 @@ You can install depict from github with:
 
 ```{r gh-installation, eval = FALSE}
 # install.packages("devtools")
-devtools::install_github("zachcp/depict")
+devtools::install_github("CDK-R/depict")
 ```
 
 ## Example

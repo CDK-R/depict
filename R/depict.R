@@ -91,7 +91,8 @@ depict <- function(dg, mol) {
   }
 
   if (!checkJavaClass(mol, c("org/openscience/cdk/AtomContainer",
-                             "org/openscience/cdk/silent/AtomContainer"))) {
+                             "org/openscience/cdk/silent/AtomContainer",
+                             "org/openscience/cdk/silent/AtomContainer2"))) {
     stop("depict requires an AtomContainer")
   }
   #.jcall(dg, "Lorg/openscience/cdk/depict/Depiction;", "depict", mol)
