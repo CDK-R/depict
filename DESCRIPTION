@@ -14,5 +14,9 @@ Depends:
 Imports:
     png,
     magrittr
-RoxygenNote: 6.1.1
-Suggests: testthat
+RoxygenNote: 7.2.1
+Suggests: 
+    knitr,
+    rmarkdown,
+    testthat
+VignetteBuilder: knitr
