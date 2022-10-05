@@ -2,6 +2,7 @@
 
 export(add_terminal_carbons)
 export(add_title)
+export(atomcontainer_list_to_jarray)
 export(color_atoms)
 export(depict)
 export(depiction)

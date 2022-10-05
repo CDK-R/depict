@@ -16,3 +16,34 @@ checkJavaClass <- function(jobj, klass ) {
   return(FALSE)
 }
 
+
+
+
+#' atomcontainer_list_to_jarray
+#'
+#'
+#' @param atomcontainers
+#' @return a java ArrayList of AtomContainers
+#' 
+#' @export
+#' @examples 
+#' \dontrun {
+#' 
+#' atmcontnrs <- purrr::map(
+#'      c("CCCCCC", "CCC1CCC1NC", "COCCOCCO")
+#'      parse_smiles)
+#'      
+#' atomcontainer_list_to_jarray(atmcontnrs)
+#' 
+#' }
+#' 
+atomcontainer_list_to_jarray <- function(atomcontainers) {
+  
+  new_array <-  .jnew('java.util.ArrayList')
+  
+  for (atmcntnr in atomcontainers) {
+    new_array$add(atmcntnr)
+  }
+  
+  new_array
+}

@@ -94,13 +94,16 @@ depict <- function(dg, mol) {
                              "org/openscience/cdk/AtomContainer2",
                              "org/openscience/cdk/silent/AtomContainer",
                              "org/openscience/cdk/silent/AtomContainer2",
-                             "org/openscience/cdk/silent/IAtomContainer"
+                             "org/openscience/cdk/silent/IAtomContainer",
+                             "java/util/ArrayList"
                              ))) {
-    stop("depict requires an AtomContainer")
-  }
+    stop("depict requires an AtomContainer or an ArrayList of them")
+  } 
+
   #.jcall(dg, "Lorg/openscience/cdk/depict/Depiction;", "depict", mol)
   dg$depict(mol)
 }
+
 #' highlight_atoms
 #'
 #' Highlight atoms
