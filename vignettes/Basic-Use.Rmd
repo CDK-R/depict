@@ -1,6 +1,8 @@
 ---
 title: "Basic-Use"
-output: rmarkdown::html_vignette
+output: 
+  rmarkdown::html_vignette:
+      toc: true
 vignette: >
   %\VignetteIndexEntry{Basic-Use}
   %\VignetteEngine{knitr::rmarkdown}
@@ -20,22 +22,56 @@ suppressMessages(library(grid))
 
 ```
 
-# depict
 
-depict is an R wrapper around the wonderful depiction api written by [John May](https://github.com/johnmay).  The entire [CDK](https://github.com/cdk) team, but especially
-John, have been steadily improving the visualization features of CDK. The depiction API is
-succinct and powerful and provides access to a vary large amount of the end-user desired functionality with a small number of composable functions. Because of the design of this API
-it is now relatively straightforward to design a simple streamlined interface to allow users to quickly and easily generate beautiful graphics.
-
-
-## Simple Depiciton
+## Simple Depiction
 
 A simple wrapper around cdk's excellent depict module.
 
-```{r warning=FALSE, message=FALSE, eval=FALSE}
+
+```{r}
 library(depict)
 library(magrittr)
-library(grid)
+
+# load a smiles string
+pen  <- parse_smiles("CC1(C(N2C(S1)C(C2=O)NC(=O)CC3=CC=CC=C3)C(=O)[O-])C penicillin")
+
+# `depiction` is the base class; styles are applied to it
+# `depict` applies the styles to the molecule
+depiction() %>%
+  depict(pen) %>%
+  get_image() %>%
+  grid::grid.raster()
+```
+
+
+## Multiple Structure Depiction
+
+# Multiple Smiles
+
+```{r}
+
+# load a few smiles as AtomContainers
+atmcontainers <-  purrr::map(
+  c("CCCC", "CCCCCC", "CCCC1CCC1CC2CCCC2"),
+  parse_smiles)
+
+# convert them into a java iterable  
+many_containers <- atomcontainer_list_to_jarray(atmcontainers)
+
+
+depiction() %>%
+  set_zoom(10) %>%
+  depict(many_containers) %>%
+  get_image() %>%
+  grid::grid.raster()
+
+```
+
+
+
+# Use Colors, SMARTS, Highlighting
+
+```{r }
 
 # you must supply java colors 
 color <- J("java.awt.Color")
@@ -64,14 +100,16 @@ depiction() %>%
   get_image() %>%
   grid::grid.raster()
 
-
 ```
+
 
 
 ## A Larger Example
 
 
-```{r message=FALSE, eval=FALSE}
+
+```{r}
+# laoding a molfile
 insulinmol <- system.file("molfiles/ChEBI_5931.mol", package="depict")
 insulin    <- read_mol(insulinmol)
 
@@ -87,30 +125,6 @@ depiction()%>%
   depict(insulin)%>%
   get_image() %>%
   grid::grid.raster()
-
-```
-
-# Multiple Smiles
-
-```{r}
-
-atmcontainers <-  purrr::map(
-  c("CCCC", "CCCCCC", "CCCC1CCC1CC2CCCC2"),
-  parse_smiles)
-
-
-  
-many_containers <- atomcontainer_list_to_jarray(atmcontainers)
-
-
-#
-# here we will depict the collection in a single image
-#
-depiction() %>%
-  depict(many_containers) %>%
-  get_image() %>%
-  grid::grid.raster()
-
 
 ```
 
