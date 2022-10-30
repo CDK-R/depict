@@ -6,6 +6,9 @@
 \usage{
 atomcontainer_list_to_jarray(atomcontainers)
 }
+\arguments{
+\item{atomcontainers}{list (R) of CDK AtomContainers.}
+}
 \value{
 a java ArrayList of AtomContainers
 }

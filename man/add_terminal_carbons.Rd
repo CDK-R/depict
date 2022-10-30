@@ -4,17 +4,14 @@
 \alias{add_terminal_carbons}
 \title{add terminal carbons}
 \usage{
-add_terminal_carbons(dg, zoom = 1)
-
-add_terminal_carbons(dg, zoom = 1)
+add_terminal_carbons(dg)
 }
 \arguments{
 \item{dg}{a Depiction Generator}
-
-\item{a}{Depiction Generator}
 }
 \description{
 add terminal carbons
-
-zoom
+}
+\seealso{
+\url{https://cdk.github.io/cdk/latest/docs/api/org/openscience/cdk/depict/DepictionGenerator.html}
 }

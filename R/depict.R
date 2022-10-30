@@ -6,9 +6,13 @@
 depiction <- function() {
   .jnew("org/openscience/cdk/depict/DepictionGenerator")
 }
+
 #' color atoms
 #'
-#' @param dg
+#' set the atom color
+#' 
+#' @param dg a CDK DepictionGenerator
+#' @seealso \url{https://cdk.github.io/cdk/latest/docs/api/org/openscience/cdk/depict/DepictionGenerator.html}
 #' @export
 color_atoms <- function(dg) {
   if (!checkJavaClass(dg, "org/openscience/cdk/depict/DepictionGenerator")) {
@@ -16,10 +20,11 @@ color_atoms <- function(dg) {
   }
   .jcall(dg, "Lorg/openscience/cdk/depict/DepictionGenerator;", "withAtomColors")
 }
+
 #' outerglow
 #'
-#' @param dg
-#' @param a Depiction Generator
+#' @param dg a CDK Depiction Generator
+#' @seealso \url{https://cdk.github.io/cdk/latest/docs/api/org/openscience/cdk/depict/DepictionGenerator.html}
 #' @export
 outerglow <- function(dg) {
   if (!checkJavaClass(dg, "org/openscience/cdk/depict/DepictionGenerator")) {
@@ -27,12 +32,13 @@ outerglow <- function(dg) {
   }
   .jcall(dg, "Lorg/openscience/cdk/depict/DepictionGenerator;", "withOuterGlowHighlight")
 }
+
 #' set_size
 #'
-#' @param dg
-#' @param width
-#' @param height
-#' @param a Depiction Generator
+#' @param dg a CDK Depiction Generator
+#' @param width width (int)
+#' @param height height  (int)
+#' @seealso \url{https://cdk.github.io/cdk/latest/docs/api/org/openscience/cdk/depict/DepictionGenerator.html}
 #' @export
 set_size <- function(dg, width, height) {
   if (!checkJavaClass(dg, "org/openscience/cdk/depict/DepictionGenerator")) {
@@ -41,10 +47,11 @@ set_size <- function(dg, width, height) {
 
   dg$withSize(width,height)
 }
+
 #' add_title
 #'
-#' @param dg
-#' @param a Depiction Generator
+#' @param dg a CDK  Depiction Generator
+#' @seealso \url{https://cdk.github.io/cdk/latest/docs/api/org/openscience/cdk/depict/DepictionGenerator.html}
 #' @export
 add_title <- function(dg) {
 
@@ -54,9 +61,11 @@ add_title <- function(dg) {
 
   dg$withMolTitle()
 }
+
 #' add terminal carbons
 #'
 #' @param dg a Depiction Generator
+#' @seealso \url{https://cdk.github.io/cdk/latest/docs/api/org/openscience/cdk/depict/DepictionGenerator.html}
 #' @export
 add_terminal_carbons <- function(dg) {
   if (!checkJavaClass(dg, "org/openscience/cdk/depict/DepictionGenerator")) {
@@ -65,25 +74,19 @@ add_terminal_carbons <- function(dg) {
   .jcall(dg, "Lorg/openscience/cdk/depict/DepictionGenerator;", "withTerminalCarbons")
 }
 
-#' zoom
-#'
-#' @param dg
-#' @param zoom
-#' @param a Depiction Generator
-#' @export
-add_terminal_carbons <- function(dg, zoom=1) {
-  if (!checkJavaClass(dg, "org/openscience/cdk/depict/DepictionGenerator")) {
-    stop("add_terminal_carbons requires a Depiction Generator")
-  }
 
-  dg$withZoom(zoom)
-}
+
 #' depict
 #'
-#' depict a molecule using the depiction generator.
+#' Depict a molecule using the depiction generator. Display options are set on
+#' the Generator. This function applies those settings to a given molecule or set
+#' of molecules.
 #'
-#' @param dg Required. A Depiction Generator
+#' @param dg Required. A DepictionGenerator
 #' @param mol Required. An AtomContainer
+#' @seealso \url{https://cdk.github.io/cdk/latest/docs/api/org/openscience/cdk/depict/DepictionGenerator.html}
+#' @seealso \url{https://cdk.github.io/cdk/latest/docs/api/org/openscience/cdk/AtomContainer.html}
+#' 
 #' @export
 depict <- function(dg, mol) {
   if (!checkJavaClass(dg, "org/openscience/cdk/depict/DepictionGenerator")) {
@@ -109,7 +112,7 @@ depict <- function(dg, mol) {
 #' Highlight atoms
 #'
 #' @param dg Required. A Depiction Generator
-#' @param highlights Required. A list of CDK IOBJects, usually atoms or bonds
+#' @param highlights Required. A list of CDK IChemOjbects, usually atoms or bonds
 #' @param color Required. A java.awt.Color
 #' @export
 highlight_atoms <- function(dg, atoms, color) {
@@ -118,6 +121,7 @@ highlight_atoms <- function(dg, atoms, color) {
   }
   dg$withHighlight(atoms, color)
 }
+
 #' save_image
 #'
 #' Highlight atoms
@@ -160,13 +164,13 @@ get_image <- function(molgrid) {
 
   img
 }
+
 #' set_zoom
 #'
 #' set_zoom
 #'
 #' @param dg a Depiction Generator
 #' @param zoom Optional. Default \code{1}
-#' @importFrom png readPNG
 #' @export
 #'
 set_zoom <- function(dg, zoom=1) {

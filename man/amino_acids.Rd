@@ -10,3 +10,8 @@ amino_acids()
 return a named list of SMARTS
 patterns for amino_acids
 }
+\seealso{
+\url{http://www.daylight.com/dayhtml/doc/theory/theory.smarts.html}
+
+\url{http://www.daylight.com/dayhtml_tutorials/languages/smarts/index.html}
+}

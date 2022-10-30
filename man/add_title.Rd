@@ -7,8 +7,11 @@
 add_title(dg)
 }
 \arguments{
-\item{a}{Depiction Generator}
+\item{dg}{a CDK  Depiction Generator}
 }
 \description{
 add_title
+}
+\seealso{
+\url{https://cdk.github.io/cdk/latest/docs/api/org/openscience/cdk/depict/DepictionGenerator.html}
 }

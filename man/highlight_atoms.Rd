@@ -11,7 +11,7 @@ highlight_atoms(dg, atoms, color)
 
 \item{color}{Required. A java.awt.Color}
 
-\item{highlights}{Required. A list of CDK IOBJects, usually atoms or bonds}
+\item{highlights}{Required. A list of CDK IChemOjbects, usually atoms or bonds}
 }
 \description{
 Highlight atoms

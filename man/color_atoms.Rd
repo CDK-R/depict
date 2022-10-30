@@ -6,6 +6,12 @@
 \usage{
 color_atoms(dg)
 }
+\arguments{
+\item{dg}{a CDK DepictionGenerator}
+}
 \description{
-color atoms
+set the atom color
+}
+\seealso{
+\url{https://cdk.github.io/cdk/latest/docs/api/org/openscience/cdk/depict/DepictionGenerator.html}
 }

@@ -1,16 +1,16 @@
 Package: depict
 Type: Package
 Title: Draw Beautiful Molecular Structures
-Version: 0.2.1
+Version: 0.3.0
 Authors@R: c(person('Zachary', 'Charlop-Powers', role=c('cre','aut',"cph"), email='zach.charlop.powers@gmail.com'))
 Description: Generate images of molecules using the Depiction API of  the 'Chemistry Development Kit'. 
     CDK's Depict Api
 License: LGPL
 LazyData: TRUE
 Depends:
-    rJava (>= 0.9-9),
-    rcdk (>= 3.3.8),
-    rcdklibs (>= 2.0)
+    rJava (>= 1.0-6),
+    rcdk (>= 3.7),
+    rcdklibs (>= 2.8)
 Imports:
     png,
     magrittr
