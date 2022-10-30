@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="index.html">depict</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -27,6 +27,9 @@
     <a class="dropdown-item" href="articles/Basic-Use.html">Basic-Use</a>
   </div>
 </li>
+<li class="nav-item">
+  <a class="nav-link" href="news/index.html">Changelog</a>
+</li>
       </ul><form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="search.json" id="search-input" placeholder="Search for" autocomplete="off"></form>
 
@@ -42,6 +45,7 @@
     </div>
 
 <div id="depict" class="section level1">
+
 <p>depict is an R wrapper around the wonderful depiction api written by <a href="https://github.com/johnmay" class="external-link">John May</a>. The entire <a href="https://github.com/cdk" class="external-link">CDK</a> team, but especially John, have been steadily improving the visualization features of CDK. The depiction API is succinct and powerful and provides access to a vary large amount of the end-user desired functionality with a small number of composable functions. Because of the design of this API it is now relatively straightforward to design a simple streamlined interface to allow users to quickly and easily generate beautiful graphics.</p>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a></h2>
@@ -50,7 +54,9 @@
 <code class="sourceCode R"><span><span class="co"># install.packages("devtools")</span></span>
 <span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"CDK-R/depict"</span><span class="op">)</span></span></code></pre></div>
 </div>
-<div class="section level2"><h2 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a></h2></div>
+<div class="section level2">
+<h2 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a></h2>
+</div>
 <div class="section level2">
 <h2 id="simple-depiciton">Simple Depiciton<a class="anchor" aria-label="anchor" href="#simple-depiciton"></a></h2>
 <p>A simple wrapper around cdk’s excellent depict module.</p>
