@@ -19,7 +19,7 @@ match_smarts <- function(smarts, mol, limit=10) {
   spattern      <- smartspattern$create(smarts, NULL)
 
   matches <- spattern$matchAll(mol)
-  matches <- matches$limit(.jcast(limit, "Integer"))
+  matches <- matches$limit(as.integer(limit))
   
   # Note: switching below to chemobjects due to reflection access with the atom-bond map
   # atombondmap <- matches$uniqueAtoms()$toAtomBondMap()
