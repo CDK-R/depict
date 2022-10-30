@@ -7,10 +7,17 @@
 depict(dg, mol)
 }
 \arguments{
-\item{dg}{Required. A Depiction Generator}
+\item{dg}{Required. A DepictionGenerator}
 
 \item{mol}{Required. An AtomContainer}
 }
 \description{
-depict a molecule using the depiction generator.
+Depict a molecule using the depiction generator. Display options are set on
+the Generator. This function applies those settings to a given molecule or set
+of molecules.
+}
+\seealso{
+\url{https://cdk.github.io/cdk/latest/docs/api/org/openscience/cdk/depict/DepictionGenerator.html}
+
+\url{https://cdk.github.io/cdk/latest/docs/api/org/openscience/cdk/AtomContainer.html}
 }

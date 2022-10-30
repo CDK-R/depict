@@ -2,16 +2,25 @@
 % Please edit documentation in R/selection_functions.R
 \name{match_smarts}
 \alias{match_smarts}
-\title{match SMARTs}
+\title{match_smarts}
 \usage{
 match_smarts(smarts, mol, limit = 10)
 }
 \arguments{
-\item{limit}{}
+\item{smarts}{a SMARTS string}
+
+\item{mol}{a CDK IAtomContainer}
+
+\item{limit}{limit of the number of matches}
 }
 \value{
 a hashset of atoms and bonds
 }
 \description{
-match SMARTs
+Find matches to a given molecule using a SMARTs pattern.
+}
+\seealso{
+\url{https://cdk.github.io/cdk/latest/docs/api/org/openscience/cdk/isomorphism/Mappings.html}
+
+\url{https://cdk.github.io/cdk/latest/docs/api/org/openscience/cdk/smiles/smarts/SmartsPattern.html}
 }

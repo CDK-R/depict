@@ -22,7 +22,7 @@ checkJavaClass <- function(jobj, klass ) {
 #' atomcontainer_list_to_jarray
 #'
 #'
-#' @param atomcontainers
+#' @param atomcontainers list (R) of CDK AtomContainers.
 #' @return a java ArrayList of AtomContainers
 #' 
 #' @export

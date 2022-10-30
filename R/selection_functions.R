@@ -2,9 +2,9 @@
 #' 
 #' Find matches to a given molecule using a SMARTs pattern.
 #'
-#' @param smarts a SMARTS sting
-#' @param mol an IAtomContainer
-#' @param limit limit of the nubmer of matches
+#' @param smarts a SMARTS string
+#' @param mol a CDK IAtomContainer
+#' @param limit limit of the number of matches
 #' 
 #' @seealso \url{https://cdk.github.io/cdk/latest/docs/api/org/openscience/cdk/isomorphism/Mappings.html}
 #' @seealso \url{https://cdk.github.io/cdk/latest/docs/api/org/openscience/cdk/smiles/smarts/SmartsPattern.html}

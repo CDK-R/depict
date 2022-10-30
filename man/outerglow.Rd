@@ -7,8 +7,11 @@
 outerglow(dg)
 }
 \arguments{
-\item{a}{Depiction Generator}
+\item{dg}{a CDK Depiction Generator}
 }
 \description{
 outerglow
+}
+\seealso{
+\url{https://cdk.github.io/cdk/latest/docs/api/org/openscience/cdk/depict/DepictionGenerator.html}
 }

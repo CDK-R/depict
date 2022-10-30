@@ -7,8 +7,15 @@
 set_size(dg, width, height)
 }
 \arguments{
-\item{a}{Depiction Generator}
+\item{dg}{a CDK Depiction Generator}
+
+\item{width}{width (int)}
+
+\item{height}{height  (int)}
 }
 \description{
 set_size
+}
+\seealso{
+\url{https://cdk.github.io/cdk/latest/docs/api/org/openscience/cdk/depict/DepictionGenerator.html}
 }
