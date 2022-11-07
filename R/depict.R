@@ -37,11 +37,10 @@ color_atoms <- function(dg, colorer=NULL) {
     
   } else {
     
-    if (!checkJavaClass(dg, "org/openscience/cdk/renderer/color/IAtomColorer")) {
+    if (!.jinherits(colorer, "org/openscience/cdk/renderer/color/IAtomColorer")) {
       stop("colorer must be an IAtomColorer")
     }
-    .jcall(dg, "Lorg/openscience/cdk/depict/DepictionGenerator;", "withAtomColors", colorer)
-    
+    .jcall(dg, "Lorg/openscience/cdk/depict/DepictionGenerator;", "withAtomColors", .jcast(colorer, "org/openscience/cdk/renderer/color/IAtomColorer"))
   }
 }
 

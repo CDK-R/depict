@@ -28,3 +28,25 @@ test_that("we can depict a molecule", {
   expect_true(inherits(img, 'array'))
   
 })
+
+
+
+test_that("Coloring works", {
+  
+  # load in penicillin
+  #pen  <- parse_smiles("CCCCC1(C(N2C(S1)C(C2=O)NC(=O)CC3=CC=CC=C3)C(=O)[O-])C penicillin")
+  pen  <- parse_smiles("CCCCC")
+  
+  # test basic coloring
+  dep <- depiction() |> color_atoms() |> depict(pen)
+  expect_equal(attr(dep, "jclass"), "org/openscience/cdk/depict/MolGridDepiction")
+  
+  # test advanced coloring
+  colors <- J("org.openscience.cdk.renderer.color.CDK2DAtomColors")
+  colorer <- new(colors)
+  
+  
+  dep <- depiction() |> color_atoms(colorer) |> depict(pen)
+  expect_equal(attr(dep, "jclass"), "org/openscience/cdk/depict/MolGridDepiction")
+  
+})

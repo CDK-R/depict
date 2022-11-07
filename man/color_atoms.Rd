@@ -4,14 +4,27 @@
 \alias{color_atoms}
 \title{color atoms}
 \usage{
-color_atoms(dg)
+color_atoms(dg, colorer = NULL)
 }
 \arguments{
 \item{dg}{a CDK DepictionGenerator}
+
+\item{colorer}{a CDK DepictionGenerator}
 }
 \description{
-set the atom color
+set the atom color. You can use default coloring or specify a custom colorer.
+}
+\examples{
+\dontrun{
+
+  dg <- depiction()
+  dg |> withAtomColors()
+
+}
+
 }
 \seealso{
 \url{https://cdk.github.io/cdk/latest/docs/api/org/openscience/cdk/depict/DepictionGenerator.html}
+
+\url{http://cdk.github.io/cdk/latest/docs/api/org/openscience/cdk/renderer/color/IAtomColorer.html}
 }
