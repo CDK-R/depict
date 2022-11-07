@@ -11,8 +11,10 @@ library(depict)
 
 # Java Helper Classes -----------------------------------
 
-color     <- J("java.awt.Color")
-unicolor  <- J("org.openscience.cdk.renderer.color.UniColor")
+color       <- J("java.awt.Color")
+unicolor    <- J("org.openscience.cdk.renderer.color.UniColor")
+cdk2dcolors <- J("org.openscience.cdk.renderer.color.CDK2DAtomColors")
+
 
 
 # Data  --------------
@@ -38,13 +40,14 @@ C*.C*.C1=CC=CC=C1C=2C(C=CN3C2C=*C(=*3)C**)=O.C* |$;R2;;R3;;;;;;;;;;;;;;W;;A;;X;R
 
 
 
-mol_color_options <- list("Color on White", 
-                      "Color on Black",
-                      "Color on Clear",
-                      "Black on White", 
-                      "Black on Clear",
-                      "White on Black",
-                      "Neon on Black")
+mol_color_options <- list(
+  "Black on Clear",
+  "Black on White", 
+  #"Color on Black",
+  "Color on Clear",
+  "Color on White", 
+  # "Neon on Black",
+  "White on Black")
 
 
 
@@ -62,13 +65,25 @@ apply_color_scheme <- function(depgen, mol_color_opt) {
   black_uni  <- new(unicolor, color$BLACK)
   white      <- color$WHITE
   white_uni  <- new(unicolor, color$WHITE)
-  tranparent <- .jnew("java/awt/Color", 0L, 0L, 0L, 0L)
+  transparent <- .jnew("java/awt/Color", 0L, 0L, 0L, 0L)
+  colors_2d  <- new(cdk2dcolors)
   
+  # Todo: to get the color on black or the neon on black you need to
+  # override the base CDK 2DAtomsColors
+  # https://github.com/cdk/depict/blob/master/cdkdepict-lib/src/main/java/org/openscience/cdk/app/DepictController.java#L978-L1069
   
   switch(
     mol_color_opt,
     "Black on White" =  (depgen |>  color_atoms(black_uni) |> color_background(white)),
+    "Black on Clear" =  (depgen |>  color_atoms(black_uni) |> color_background(transparent)),
+    # "Color on Black" =  (depgen |>  color_atoms(colors_2d) |> color_background(black)),
+    "Color on Clear" =  (depgen |>  color_atoms(colors_2d) |> color_background(transparent) |> outerglow()),
+    "Color on White" =  (depgen |>  color_atoms(colors_2d) |> color_background(white) |> outerglow()),
+    # "Neon on Black")
     "White on Black" =  (depgen |>  color_atoms(white_uni) |> color_background(black)),
+    
+    
+    
     { 
       warning(sprintf("this option (%s) is implemented", mol_color_opt))
       depgen
