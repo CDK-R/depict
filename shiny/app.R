@@ -105,6 +105,24 @@ ui <- fluidPage(
   flowLayout(
     selectInput("colors", "Colors", mol_color_options, selected = "Black on White"),
   
+    # set core depiction proerties here
+    # 
+    # 
+    # } else {
+    #   mol = loadMol(smi);
+    #   setHydrogenDisplay(mol, hDisplayType);
+    #   highlight = findHits(getString(Param.SMARTSQUERY, extra),
+    #                        rxn,
+    #                        mol,
+    #                        getInt(Param.SMARTSHITLIM, extra));
+    #   abbreviate(mol, abbr, annotate);
+    #   MolOp.perceiveRadicals(mol);
+    #   MolOp.perceiveDativeBonds(mol);
+    #   if (!GeometryUtil.has2DCoordinates(mol))
+    #     sdg.generateCoordinates(mol);
+    # }
+    
+    # https://github.com/cdk/depict/blob/master/cdkdepict-lib/src/main/java/org/openscience/cdk/app/DepictController.java#L346-L387
     # selectInput("annotations",
     #             "Annotations",
     #             list("No Annotation", 
@@ -113,20 +131,26 @@ ui <- fluidPage(
     #                  "Color Map",
     #                  "Atom Value",
     #                  "CIP Stereo Label")),
+    
+    
+    # https://github.com/cdk/depict/blob/master/cdkdepict-lib/src/main/java/org/openscience/cdk/app/DepictController.java#L579-L722
     # selectInput("hydrogens",
     #             "Hydrogens",
     #             list("Chiral Hydrogens",
     #                  "Minimal Hydrogens",
     #                  "Chiral Hydrogens (smart)",
     #                  "Default Hydrogens")),
+    
+    
     # selectInput("abbreviations_and_groups",
     #             "Abbreviations and Groups",
     #             list("Abbreviate Reagents and Groups",
-    #                  "Abbreviate Reagetns",
+    #                  "Abbreviate Reagents",
     #                  "Abbreviate Groups",
     #                  "Do Not Abbreviate")),
   
-    # textInput("smarts_pattern","SMARTS Pattern:", placeholder = "enter SMARTS pattern here....")
+    textInput("smarts_pattern","SMARTS Pattern:", placeholder = "enter SMARTS pattern here....")
+    
     ),
   imageOutput("smilesimage")
 )
@@ -140,19 +164,28 @@ ui <- fluidPage(
 server <- function(input, output, session) {
 
   output$smilesimage <- renderImage({
+    
     dataset         <- input$smiles
     color_option    <- input$colors
+    smarts_query    <- input$smarts_pattern
+    
     # Todo: more robust SMILES parsing.....
     smiles_strings  <- strsplit(dataset, "\n")[[1]]
     # print(smiles_strings)
     atmcontainers   <- purrr::map(smiles_strings, parse_smiles)
     many_containers <- atomcontainer_list_to_jarray(atmcontainers)
     
-
+    many_containers
+    
     tmpf <- tempfile(fileext='.png')
+    
+
+    
+
     
     dep <- depiction()
     
+    # add color scheme
     dep <- dep |> apply_color_scheme(color_option)
     
     dep |> 
