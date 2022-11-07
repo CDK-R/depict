@@ -9,16 +9,40 @@ depiction <- function() {
 
 #' color atoms
 #'
-#' set the atom color
+#' set the atom color. You can use default coloring or specify a custom colorer.
 #' 
 #' @param dg a CDK DepictionGenerator
+#' @param colorer a CDK DepictionGenerator
 #' @seealso \url{https://cdk.github.io/cdk/latest/docs/api/org/openscience/cdk/depict/DepictionGenerator.html}
+#' @seealso \url{http://cdk.github.io/cdk/latest/docs/api/org/openscience/cdk/renderer/color/IAtomColorer.html}
+#' 
 #' @export
-color_atoms <- function(dg) {
+#' 
+#' @examples 
+#' \dontrun{
+#' 
+#'   dg <- depiction()
+#'   dg |> withAtomColors()
+#' 
+#' }
+#' 
+color_atoms <- function(dg, colorer=NULL) {
   if (!checkJavaClass(dg, "org/openscience/cdk/depict/DepictionGenerator")) {
     stop("color_atoms requires a Depiction Generator")
   }
-  .jcall(dg, "Lorg/openscience/cdk/depict/DepictionGenerator;", "withAtomColors")
+  
+  if (is.null(colorer)) {
+    
+    .jcall(dg, "Lorg/openscience/cdk/depict/DepictionGenerator;", "withAtomColors")
+    
+  } else {
+    
+    if (!checkJavaClass(dg, "org/openscience/cdk/renderer/color/IAtomColorer")) {
+      stop("colorer must be an IAtomColorer")
+    }
+    .jcall(dg, "Lorg/openscience/cdk/depict/DepictionGenerator;", "withAtomColors", colorer)
+    
+  }
 }
 
 #' outerglow
