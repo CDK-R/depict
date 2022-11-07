@@ -126,7 +126,7 @@ ui <- fluidPage(
     #                  "Abbreviate Groups",
     #                  "Do Not Abbreviate")),
   
-    textInput("smarts_pattern","SMARTS Pattern:", placeholder = "enter SMARTS pattern here....")
+    # textInput("smarts_pattern","SMARTS Pattern:", placeholder = "enter SMARTS pattern here....")
     ),
   imageOutput("smilesimage")
 )
