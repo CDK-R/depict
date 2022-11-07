@@ -22,7 +22,7 @@ depiction <- function() {
 #' \dontrun{
 #' 
 #'   dg <- depiction()
-#'   dg |> withAtomColors()
+#'   dg |> color_atoms()
 #' 
 #' }
 #' 
@@ -44,6 +44,39 @@ color_atoms <- function(dg, colorer=NULL) {
   }
 }
 
+
+#' color background
+#'
+#' set the background color
+#' 
+#' @param dg a CDK DepictionGenerator
+#' @param color a Java Color 
+#' @seealso \url{https://cdk.github.io/cdk/latest/docs/api/org/openscience/cdk/depict/DepictionGenerator.html}
+#' 
+#' @export
+#' 
+#' @examples 
+#' \dontrun{
+#' 
+#'   dg <- depiction()
+#'   dg |> color_background()
+#' 
+#' }
+#' 
+color_background <- function(dg, color) {
+  if (!checkJavaClass(dg, "org/openscience/cdk/depict/DepictionGenerator")) {
+    stop("color_background requires a Depiction Generator")
+  }
+  if (!checkJavaClass(color, "java/awt/Color")) {
+    stop("color_background requires a java Color")
+  }
+  
+  .jcall(dg, "Lorg/openscience/cdk/depict/DepictionGenerator;", "withBackgroundColor", color)
+
+}
+
+
+  
 #' outerglow
 #'
 #' @param dg a CDK Depiction Generator

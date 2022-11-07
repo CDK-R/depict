@@ -31,7 +31,7 @@ test_that("we can depict a molecule", {
 
 
 
-test_that("Coloring works", {
+test_that("coloring works", {
   
   # load in penicillin
   #pen  <- parse_smiles("CCCCC1(C(N2C(S1)C(C2=O)NC(=O)CC3=CC=CC=C3)C(=O)[O-])C penicillin")
@@ -44,9 +44,12 @@ test_that("Coloring works", {
   # test advanced coloring
   colors <- J("org.openscience.cdk.renderer.color.CDK2DAtomColors")
   colorer <- new(colors)
-  
-  
   dep <- depiction() |> color_atoms(colorer) |> depict(pen)
+  expect_equal(attr(dep, "jclass"), "org/openscience/cdk/depict/MolGridDepiction")
+  
+  # test background coloring
+  colors <- J("java.awt.Color")
+  dep <- depiction() |> color_background(colors$BLACK) |> depict(pen)
   expect_equal(attr(dep, "jclass"), "org/openscience/cdk/depict/MolGridDepiction")
   
 })
