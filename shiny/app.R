@@ -1,5 +1,13 @@
+#'
+#' rCDK Version of the CDK Depict App.
+#'
+#' Main Java Class here: https://github.com/cdk/depict/blob/master/cdkdepict-lib/src/main/java/org/openscience/cdk/app/DepictController.java
+#' 
+#' see https://www.simolecule.com/cdkdepict/depict.html
+
 library(shiny)
 library(depict)
+
 
 # Initial Data  --------------
 
@@ -35,25 +43,35 @@ ui <- fluidPage(
   flowLayout(
     selectInput("colors",
                 "Colors", 
-                list(`East Coast` = list("NY", "NJ", "CT"),
-                     `West Coast` = list("WA", "OR", "CA"),
-                    `Midwest` = list("MN", "WI", "IA"))),
+                list("Color on White", 
+                     "Color on Black",
+                     "Color on Clear",
+                     "Black on White", 
+                     "Black on Clear",
+                     "White on Black",
+                     "Neon on Black")),
     selectInput("annotations",
                 "Annotations",
-                list(`East Coast` = list("NY", "NJ", "CT"),
-                     `West Coast` = list("WA", "OR", "CA"),
-                    `Midwest` = list("MN", "WI", "IA"))),
+                list("No Annotation", 
+                     "Atom Numbers", 
+                     "Atom Mapping", 
+                     "Color Map",
+                     "Atom Value",
+                     "CIP Stereo Label")),
     selectInput("hydrogens",
                 "Hydrogens",
-                list(`East Coast` = list("NY", "NJ", "CT"),
-                     `West Coast` = list("WA", "OR", "CA"),
-                     `Midwest` = list("MN", "WI", "IA"))),
+                list("Chiral Hydrogens",
+                     "Minimal Hydrogens",
+                     "Chiral Hydrogens (smart)",
+                     "Default Hydrogens")),
     selectInput("abbreviations_and_groups",
                 "Abbreviations and Groups",
-                list(`East Coast` = list("NY", "NJ", "CT"),
-                     `West Coast` = list("WA", "OR", "CA"),
-                     `Midwest` = list("MN", "WI", "IA"))),
-    textInput("smarts_pattern","SMARTS Pattern")
+                list("Abbreviate Reagents and Groups",
+                     "Abbreviate Reagetns",
+                     "Abbreviate Groups",
+                     "Do Not Abbreviate")),
+  
+    textInput("smarts_pattern","SMARTS Pattern:", placeholder = "enter SMARTS pattern here....")
     ),
   imageOutput("smilesimage")
 )
@@ -67,16 +85,15 @@ ui <- fluidPage(
 server <- function(input, output, session) {
 
   output$smilesimage <- renderImage({
-    dataset <- input$smiles
-    #dataset <- r_values$smiles_strings
-    smiles_strings  <- strsplit(dataset, "\n")[[1]]
-    print(smiles_strings)
+    dataset         <- input$smiles
     
-    # smiles_strings  <- c("CCC","CCCCNCC")
+    # Todo: more robust SMILES parsing.....
+    smiles_strings  <- strsplit(dataset, "\n")[[1]]
+    # print(smiles_strings)
     atmcontainers   <- purrr::map(smiles_strings, parse_smiles)
     many_containers <- atomcontainer_list_to_jarray(atmcontainers)
     
-    
+
     tmpf <- tempfile(fileext='.png')
     
     depiction() |>
@@ -93,4 +110,5 @@ server <- function(input, output, session) {
 
 
 # Launch  --------------
+
 shinyApp(ui, server)
