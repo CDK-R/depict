@@ -9,7 +9,13 @@ library(shiny)
 library(depict)
 
 
-# Initial Data  --------------
+# Java Helper Classes -----------------------------------
+
+color     <- J("java.awt.Color")
+unicolor  <- J("org.openscience.cdk.renderer.color.UniColor")
+
+
+# Data  --------------
 
 # see https://www.simolecule.com/cdkdepict/depict.html
 initial_smiles <- "CN1C=NC2=C1C(=O)N(C(=O)N2C)C caffeine
@@ -31,6 +37,47 @@ C*.C*.C1=CC=CC=C1C=2C(C=CN3C2C=*C(=*3)C**)=O.C* |$;R2;;R3;;;;;;;;;;;;;;W;;A;;X;R
 # [CH3:9][CH:8]([CH3:10])[c:7]1[cH:11][cH:12][cH:13][cH:14][cH:15]1.[CH2:3]([CH2:4][C:5](=[O:6])Cl)[CH2:2][Cl:1]>[Al+3].[Cl-].[Cl-].[Cl-].C(Cl)Cl>[CH3:9][CH:8]([CH3:10])[c:7]1[cH:11][cH:12][c:13]([cH:14][cH:15]1)[C:5](=[O:6])[CH2:4][CH2:3][CH2:2][Cl:1] |f:2.3.4.5| Friedel-Crafts acylation [3.10.1]
 
 
+
+mol_color_options <- list("Color on White", 
+                      "Color on Black",
+                      "Color on Clear",
+                      "Black on White", 
+                      "Black on Clear",
+                      "White on Black",
+                      "Neon on Black")
+
+
+
+# Functions ------------------------
+
+
+#' apply_color_scheme
+#'
+#' handle colors
+#' See https://github.com/cdk/depict/blob/master/cdkdepict-lib/src/main/java/org/openscience/cdk/app/DepictController.java#L978
+#' 
+apply_color_scheme <- function(depgen, mol_color_opt) {
+  
+  black      <- color$BLACK
+  black_uni  <- new(unicolor, color$BLACK)
+  white      <- color$WHITE
+  white_uni  <- new(unicolor, color$WHITE)
+  tranparent <- .jnew("java/awt/Color", 0L, 0L, 0L, 0L)
+  
+  
+  switch(
+    mol_color_opt,
+    "Black on White" =  (depgen |>  color_atoms(black_uni) |> color_background(white)),
+    "White on Black" =  (depgen |>  color_atoms(white_uni) |> color_background(black)),
+    { 
+      warning(sprintf("this option (%s) is implemented", mol_color_opt))
+      depgen
+    }
+  )
+}
+
+
+
 # UI  --------------
 
 ui <- fluidPage(
@@ -41,35 +88,28 @@ ui <- fluidPage(
     value = initial_smiles,
     width="100%"),
   flowLayout(
-    selectInput("colors",
-                "Colors", 
-                list("Color on White", 
-                     "Color on Black",
-                     "Color on Clear",
-                     "Black on White", 
-                     "Black on Clear",
-                     "White on Black",
-                     "Neon on Black")),
-    selectInput("annotations",
-                "Annotations",
-                list("No Annotation", 
-                     "Atom Numbers", 
-                     "Atom Mapping", 
-                     "Color Map",
-                     "Atom Value",
-                     "CIP Stereo Label")),
-    selectInput("hydrogens",
-                "Hydrogens",
-                list("Chiral Hydrogens",
-                     "Minimal Hydrogens",
-                     "Chiral Hydrogens (smart)",
-                     "Default Hydrogens")),
-    selectInput("abbreviations_and_groups",
-                "Abbreviations and Groups",
-                list("Abbreviate Reagents and Groups",
-                     "Abbreviate Reagetns",
-                     "Abbreviate Groups",
-                     "Do Not Abbreviate")),
+    selectInput("colors", "Colors", mol_color_options, selected = "Black on White"),
+  
+    # selectInput("annotations",
+    #             "Annotations",
+    #             list("No Annotation", 
+    #                  "Atom Numbers", 
+    #                  "Atom Mapping", 
+    #                  "Color Map",
+    #                  "Atom Value",
+    #                  "CIP Stereo Label")),
+    # selectInput("hydrogens",
+    #             "Hydrogens",
+    #             list("Chiral Hydrogens",
+    #                  "Minimal Hydrogens",
+    #                  "Chiral Hydrogens (smart)",
+    #                  "Default Hydrogens")),
+    # selectInput("abbreviations_and_groups",
+    #             "Abbreviations and Groups",
+    #             list("Abbreviate Reagents and Groups",
+    #                  "Abbreviate Reagetns",
+    #                  "Abbreviate Groups",
+    #                  "Do Not Abbreviate")),
   
     textInput("smarts_pattern","SMARTS Pattern:", placeholder = "enter SMARTS pattern here....")
     ),
@@ -86,7 +126,7 @@ server <- function(input, output, session) {
 
   output$smilesimage <- renderImage({
     dataset         <- input$smiles
-    
+    color_option    <- input$colors
     # Todo: more robust SMILES parsing.....
     smiles_strings  <- strsplit(dataset, "\n")[[1]]
     # print(smiles_strings)
@@ -96,7 +136,11 @@ server <- function(input, output, session) {
 
     tmpf <- tempfile(fileext='.png')
     
-    depiction() |>
+    dep <- depiction()
+    
+    dep <- dep |> apply_color_scheme(color_option)
+    
+    dep |> 
       depict(many_containers) |>
       save_image(tmpf)
     

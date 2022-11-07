@@ -18,7 +18,7 @@ set the atom color. You can use default coloring or specify a custom colorer.
 \dontrun{
 
   dg <- depiction()
-  dg |> withAtomColors()
+  dg |> color_atoms()
 
 }
 
