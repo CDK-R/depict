@@ -1,9 +1,15 @@
 library(shiny)
 library(depict)
 
-# InitialData  --------------
+# Initial Data  --------------
 
 # see https://www.simolecule.com/cdkdepict/depict.html
+initial_smiles <- "
+[Na+].[Na+].[Na+].[Na+].[Na+].[Na+].[Na+].[Na+].[Na+].[Na+].[Na+].[Na+].[Na+].CCCCc1ccc(CO[C@H]2O[C@H](COS(=O)(=O)[O-])[C@@H](OS(=O)(=O)[O-])[C@H](OS(=O)(=O)[O-])[C@@H]2O[C@H]3O[C@H](COS(=O)(=O)[O-])[C@@H](OS(=O)(=O)[O-])[C@H](O[C@H]4O[C@H](COS(=O)(=O)[O-])[C@@H](OS(=O)(=O)[O-])[C@H](O[C@H]5O[C@H](COS(=O)(=O)[O-])[C@@H](OS(=O)(=O)[O-])[C@H](OS(=O)(=O)[O-])[C@@H]5OS(=O)(=O)[O-])[C@@H]4OS(=O)(=O)[O-])[C@@H]3OS(=O)(=O)[O-])cc1 CHEMBL590010
+CCO.[CH3:1][C:2](=[O:3])[OH:4]>[H+]>CC[O:4][C:2](=[O:3])[CH3:1].O Ethyl esterification [1.7.3]
+[CH3:9][CH:8]([CH3:10])[c:7]1[cH:11][cH:12][cH:13][cH:14][cH:15]1.[CH2:3]([CH2:4][C:5](=[O:6])Cl)[CH2:2][Cl:1]>[Al+3].[Cl-].[Cl-].[Cl-].C(Cl)Cl>[CH3:9][CH:8]([CH3:10])[c:7]1[cH:11][cH:12][c:13]([cH:14][cH:15]1)[C:5](=[O:6])[CH2:4][CH2:3][CH2:2][Cl:1] |f:2.3.4.5| Friedel-Crafts acylation [3.10.1]
+"
+
 initial_smiles <- "CN1C=NC2=C1C(=O)N(C(=O)N2C)C caffeine
 [Cs+].[O-]C(=O)[O-].[Cs+] Cs2CO3
 [Li+].[Al+3].[H-].[H-].[H-].[H-] LiAlH4
@@ -16,43 +22,58 @@ CC(C)[C@H](N*)C(*)=O |$;;;;;_AP1;;_AP2;$| valine monomer
 c1(:*:c2c(:*:c1*)C(N(N2)*)=O)* |$;Y;;;X;;R10;;;;Z;;R11$| US 2007/0129374 (I)
 C*.C*.C1=CC=CC=C1C=2C(C=CN3C2C=*C(=*3)C**)=O.C* |$;R2;;R3;;;;;;;;;;;;;;W;;A;;X;R4;;;R1$,m:0:5.4.9.8.7.6,2:7.6.5.4.9.8,24:4.9.8.7.6.5,Sg:n:20:m:ht| US 2007/0129372 (I)
 [Na+].[Na+].[Na+].[Na+].[Na+].[Na+].[Na+].[Na+].[Na+].[Na+].[Na+].[Na+].[Na+].CCCCc1ccc(CO[C@H]2O[C@H](COS(=O)(=O)[O-])[C@@H](OS(=O)(=O)[O-])[C@H](OS(=O)(=O)[O-])[C@@H]2O[C@H]3O[C@H](COS(=O)(=O)[O-])[C@@H](OS(=O)(=O)[O-])[C@H](O[C@H]4O[C@H](COS(=O)(=O)[O-])[C@@H](OS(=O)(=O)[O-])[C@H](O[C@H]5O[C@H](COS(=O)(=O)[O-])[C@@H](OS(=O)(=O)[O-])[C@H](OS(=O)(=O)[O-])[C@@H]5OS(=O)(=O)[O-])[C@@H]4OS(=O)(=O)[O-])[C@@H]3OS(=O)(=O)[O-])cc1 CHEMBL590010
-CCO.[CH3:1][C:2](=[O:3])[OH:4]>[H+]>CC[O:4][C:2](=[O:3])[CH3:1].O Ethyl esterification [1.7.3]
-[CH3:9][CH:8]([CH3:10])[c:7]1[cH:11][cH:12][cH:13][cH:14][cH:15]1.[CH2:3]([CH2:4][C:5](=[O:6])Cl)[CH2:2][Cl:1]>[Al+3].[Cl-].[Cl-].[Cl-].C(Cl)Cl>[CH3:9][CH:8]([CH3:10])[c:7]1[cH:11][cH:12][c:13]([cH:14][cH:15]1)[C:5](=[O:6])[CH2:4][CH2:3][CH2:2][Cl:1] |f:2.3.4.5| Friedel-Crafts acylation [3.10.1]"
+"
+
+# Todo: Problems here
+# CCO.[CH3:1][C:2](=[O:3])[OH:4]>[H+]>CC[O:4][C:2](=[O:3])[CH3:1].O Ethyl esterification [1.7.3]
+# [CH3:9][CH:8]([CH3:10])[c:7]1[cH:11][cH:12][cH:13][cH:14][cH:15]1.[CH2:3]([CH2:4][C:5](=[O:6])Cl)[CH2:2][Cl:1]>[Al+3].[Cl-].[Cl-].[Cl-].C(Cl)Cl>[CH3:9][CH:8]([CH3:10])[c:7]1[cH:11][cH:12][c:13]([cH:14][cH:15]1)[C:5](=[O:6])[CH2:4][CH2:3][CH2:2][Cl:1] |f:2.3.4.5| Friedel-Crafts acylation [3.10.1]
+
 
 # UI  --------------
 
 ui <- fluidPage(
   textAreaInput(
     "smiles",
-    label="SmilesData"
-  ),
+    label ="SmilesData",
+    value = initial_smiles),
   imageOutput("smilesimage")
 )
+
+
 
 
 
 # Server  --------------
 
 server <- function(input, output, session) {
-  
+  # observe(r_values$smiles_strings <- initial_smiles)
+  # 
+  # 
+  # observeEvent(input$smiles, {
+  #   r_values$smiles_strings <- input$smiles
+  #   updateTextAreaInput(session, inputId = "smiles", value = "")
+  # }, ignoreNULL=FALSE)
+  # 
+  # 
   output$smilesimage <- renderImage({
     dataset <- input$smiles
-    smiles_strings  <- strsplit(dataset, "\n")
+    #dataset <- r_values$smiles_strings
+    smiles_strings  <- strsplit(dataset, "\n")[[1]]
+    print(smiles_strings)
     
-    #smiles_strings  <- c("CCC","CCCCNCC")
-    #atmcontainers   <- purrr::map(smiles_strings, parse_smiles)
-    #many_containers <- atomcontainer_list_to_jarray(atmcontainers)
+    # smiles_strings  <- c("CCC","CCCCNCC")
+    atmcontainers   <- purrr::map(smiles_strings, parse_smiles)
+    many_containers <- atomcontainer_list_to_jarray(atmcontainers)
     
-    mol1 <- parse_smiles("CCCCC")
     
     tmpf <- tempfile(fileext='.png')
     
     depiction() |>
-      depict(mol1) |>
+      depict(many_containers) |>
       save_image(tmpf)
     
     # return a list
-    list(src = tmpf, alt = "This is alternate text")
+    list(src = tmpf, alt = "Images of Compounds")
   },
   
   deleteFile = TRUE)
