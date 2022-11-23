@@ -26,7 +26,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">depict</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.1</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -150,9 +150,52 @@
 <span>  <span class="fu">grid</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/grid/grid.raster.html" class="external-link">grid.raster</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p><img src="Basic-Use_files/figure-html/unnamed-chunk-4-1.png" width="700"></p>
 <div class="section level3">
-<h3 id="a-larger-example">A Larger Example<a class="anchor" aria-label="anchor" href="#a-larger-example"></a>
+<h3 id="smarts-for-highlighting-mutiple-containers">SMARTS for highlighting mutiple containers<a class="anchor" aria-label="anchor" href="#smarts-for-highlighting-mutiple-containers"></a>
 </h3>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span></span>
+<span><span class="va">small_highlight</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/match_smarts.html">match_smarts</a></span><span class="op">(</span><span class="st">"C1CCC1"</span>, <span class="va">many_containers</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="../reference/depiction.html">depiction</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/highlight_atoms.html">highlight_atoms</a></span><span class="op">(</span><span class="va">small_highlight</span>, <span class="va">color</span><span class="op">$</span><span class="va">RED</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/set_size.html">set_size</a></span><span class="op">(</span><span class="fl">400</span>, <span class="fl">400</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/set_zoom.html">set_zoom</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/outerglow.html">outerglow</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/add_title.html">add_title</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/depict.html">depict</a></span><span class="op">(</span><span class="va">many_containers</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/get_image.html">get_image</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu">grid</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/grid/grid.raster.html" class="external-link">grid.raster</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<p><img src="Basic-Use_files/figure-html/unnamed-chunk-5-1.png" width="700"></p>
+</div>
+<div class="section level3">
+<h3 id="multiple-colors">Multiple Colors<a class="anchor" aria-label="anchor" href="#multiple-colors"></a>
+</h3>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">mol</span>       <span class="op">&lt;-</span> <span class="fu"><a href="../reference/parse_smiles.html">parse_smiles</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"CC(n1c(C)ncc1c1ccnc(n1)Nc1ccc(cc1)S(=O)(=O)C)C"</span>, </span>
+<span>                                <span class="st">"CMGC:CDC2:6gu3:A:FB8"</span>, sep<span class="op">=</span><span class="st">" "</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># imid      &lt;- 'c1cnc[nH]1'  #1H-imidazole</span></span>
+<span><span class="va">highlight_imid</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/match_smarts.html">match_smarts</a></span><span class="op">(</span><span class="st">"c1cncn1"</span>, <span class="va">mol</span><span class="op">)</span></span>
+<span><span class="va">highlight_2</span>    <span class="op">&lt;-</span> <span class="fu"><a href="../reference/match_smarts.html">match_smarts</a></span><span class="op">(</span><span class="st">"n1cccnc1Nc2ccccc2"</span>, <span class="va">mol</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">color</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/rJava/man/J.html" class="external-link">J</a></span><span class="op">(</span><span class="st">"java.awt.Color"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="../reference/depiction.html">depiction</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/highlight_atoms.html">highlight_atoms</a></span><span class="op">(</span><span class="va">highlight_imid</span>, <span class="va">color</span><span class="op">$</span><span class="va">GREEN</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/highlight_atoms.html">highlight_atoms</a></span><span class="op">(</span><span class="va">highlight_2</span>, <span class="va">color</span><span class="op">$</span><span class="va">RED</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/set_size.html">set_size</a></span><span class="op">(</span><span class="fl">400</span>, <span class="fl">400</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/set_zoom.html">set_zoom</a></span><span class="op">(</span><span class="fl">4</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/outerglow.html">outerglow</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/add_title.html">add_title</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/depict.html">depict</a></span><span class="op">(</span><span class="va">mol</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/get_image.html">get_image</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">grid</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/grid/grid.raster.html" class="external-link">grid.raster</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<p><img src="Basic-Use_files/figure-html/unnamed-chunk-6-1.png" width="700"></p>
+</div>
+<div class="section level3">
+<h3 id="a-larger-example">A Larger Example<a class="anchor" aria-label="anchor" href="#a-larger-example"></a>
+</h3>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># laoding a molfile</span></span>
 <span><span class="va">insulinmol</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"molfiles/ChEBI_5931.mol"</span>, package<span class="op">=</span><span class="st">"depict"</span><span class="op">)</span></span>
 <span><span class="va">insulin</span>    <span class="op">&lt;-</span> <span class="fu"><a href="../reference/read_mol.html">read_mol</a></span><span class="op">(</span><span class="va">insulinmol</span><span class="op">)</span></span>
@@ -169,7 +212,7 @@
 <span>  <span class="fu"><a href="../reference/depict.html">depict</a></span><span class="op">(</span><span class="va">insulin</span><span class="op">)</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/get_image.html">get_image</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu">grid</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/grid/grid.raster.html" class="external-link">grid.raster</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p><img src="Basic-Use_files/figure-html/unnamed-chunk-5-1.png" width="700"></p>
+<p><img src="Basic-Use_files/figure-html/unnamed-chunk-7-1.png" width="700"></p>
 </div>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
