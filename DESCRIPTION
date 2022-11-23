@@ -1,7 +1,7 @@
 Package: depict
 Type: Package
 Title: Draw Beautiful Molecular Structures
-Version: 0.3.0
+Version: 0.3.1
 Authors@R: c(person('Zachary', 'Charlop-Powers', role=c('cre','aut',"cph"), email='zach.charlop.powers@gmail.com'))
 Description: Generate images of molecules using the Depiction API of  the 'Chemistry Development Kit'. 
     CDK's Depict Api
@@ -14,7 +14,7 @@ Depends:
 Imports:
     png,
     magrittr
-RoxygenNote: 7.2.1
+RoxygenNote: 7.2.2
 Suggests: 
     knitr,
     rmarkdown,
