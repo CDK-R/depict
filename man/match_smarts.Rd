@@ -9,7 +9,7 @@ match_smarts(smarts, mol, limit = 10)
 \arguments{
 \item{smarts}{a SMARTS string}
 
-\item{mol}{a CDK IAtomContainer}
+\item{mol}{a CDK IAtomContainer or a java.util.Arraylist of them}
 
 \item{limit}{limit of the number of matches}
 }
