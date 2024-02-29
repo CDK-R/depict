@@ -1,7 +1,7 @@
 Package: depict
 Type: Package
 Title: Draw Beautiful Molecular Structures
-Version: 0.3.2
+Version: 0.4.0
 Authors@R: c(
   person('Zachary', 'Charlop-Powers', ,'zach.charlop.powers@gmail.com',role=c('cre'), 
       comment = c(ORCID = "0000-0001-8816-4680")))
@@ -20,7 +20,7 @@ Encoding: UTF-8
 URL: https://cdk-r.github.io/depict/
 Suggests: 
     knitr,
-    magrittr
+    magrittr,
     rmarkdown,
     testthat,
 VignetteBuilder: knitr

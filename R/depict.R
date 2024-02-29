@@ -90,14 +90,17 @@ add_terminal_carbons <- function(dg) {
 #' @export
 depict <- function(dg, mol) {
   if (!checkJavaClass(dg, "org/openscience/cdk/depict/DepictionGenerator")) {
+    print(.jclass(dg))
     stop("depict requires a Depiction Generator")
   }
 
   if (!checkJavaClass(mol, c("org/openscience/cdk/AtomContainer",
                              "org/openscience/cdk/AtomContainer2",
+                             "org/openscience/cdk/Reaction",
                              "org/openscience/cdk/silent/AtomContainer",
                              "org/openscience/cdk/silent/AtomContainer2",
                              "org/openscience/cdk/silent/IAtomContainer",
+                             "org/openscience/cdk/silent/Reaction",
                              "java/util/ArrayList"
                              ))) {
     stop("depict requires an AtomContainer or an ArrayList of them")
