@@ -107,9 +107,9 @@ depiction() |>
 
 small_highlight <- match_smarts("C1CCC1", many_containers)
 
-depiction() %>%
+depiction() |>
   highlight_atoms(small_highlight, color$RED) |>
-  set_size(400, 400) %>%
+  set_size(400, 400) |>
   set_zoom(3) |>
   outerglow() |>
   add_title() |>
