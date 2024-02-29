@@ -134,7 +134,10 @@ highlight_atoms <- function(dg, atoms, color) {
 #' @param outfile Required. Filepath to the output
 #' @export
 save_image <- function(molgrid, filepath) {
-  if (!checkJavaClass(molgrid, "org/openscience/cdk/depict/MolGridDepiction")) {
+  if (!checkJavaClass(molgrid, c(
+    "org/openscience/cdk/depict/MolGridDepiction",
+    "org/openscience/cdk/depict/ReactionDepiction"
+  ))) {
     stop("highlight_atoms requires a Depiction Generator")
   }
   molgrid$writeTo(filepath)
