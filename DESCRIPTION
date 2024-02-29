@@ -12,11 +12,12 @@ Depends:
     rcdk (>= 3.7),
     rcdklibs (>= 2.8)
 Imports:
-    png,
-    magrittr
+    png
 RoxygenNote: 7.2.2
+URL: https://cdk-r.github.io/depict/
 Suggests: 
     knitr,
+    magrittr
     rmarkdown,
-    testthat
+    testthat,
 VignetteBuilder: knitr
