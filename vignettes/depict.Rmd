@@ -18,7 +18,6 @@ knitr::opts_chunk$set(
 knitr::opts_chunk$set(echo = TRUE)
 suppressMessages(library(depict))
 suppressMessages(library(grid))
-
 ```
 
 
@@ -31,7 +30,7 @@ A simple wrapper around cdk's excellent depict module.
 library(depict)
 
 # load a smiles string
-pen  <- parse_smiles("CC1(C(N2C(S1)C(C2=O)NC(=O)CC3=CC=CC=C3)C(=O)[O-])C penicillin")
+pen <- parse_smiles("CC1(C(N2C(S1)C(C2=O)NC(=O)CC3=CC=CC=C3)C(=O)[O-])C penicillin")
 
 # `depiction` is the base class; styles are applied to it
 # `depict` applies the styles to the molecule
@@ -47,13 +46,13 @@ depiction() |>
 # Multiple Smiles
 
 ```{r}
-
 # load a few smiles as AtomContainers
-atmcontainers <-  purrr::map(
+atmcontainers <- purrr::map(
   c("CCCC", "CCCCCC", "CCCC1CCC1CC2CCCC2"),
-  parse_smiles)
+  parse_smiles
+)
 
-# convert them into a java iterable  
+# convert them into a java iterable
 many_containers <- atomcontainer_list_to_jarray(atmcontainers)
 
 
@@ -62,7 +61,6 @@ depiction() |>
   depict(many_containers) |>
   get_image() |>
   grid::grid.raster()
-
 ```
 
 
@@ -70,13 +68,12 @@ depiction() |>
 # Use Colors, SMARTS, Highlighting
 
 ```{r }
-
-# you must supply java colors 
+# you must supply java colors
 color <- J("java.awt.Color")
 
 # load in penicillin
-pen  <- parse_smiles("CC1(C(N2C(S1)C(C2=O)NC(=O)CC3=CC=CC=C3)C(=O)[O-])C penicillin")
-cav  <- parse_smiles("CN1C=NC2=C1C(=O)N(C(=O)N2C)C")
+pen <- parse_smiles("CC1(C(N2C(S1)C(C2=O)NC(=O)CC3=CC=CC=C3)C(=O)[O-])C penicillin")
+cav <- parse_smiles("CN1C=NC2=C1C(=O)N(C(=O)N2C)C")
 
 # define the regions to highlight
 # either all atoms/bonds
@@ -97,14 +94,12 @@ depiction() |>
   depict(pen) |>
   get_image() |>
   grid::grid.raster()
-
 ```
 
 
 ##  SMARTS for highlighting mutiple containers
 
 ```{r}
-
 small_highlight <- match_smarts("C1CCC1", many_containers)
 
 depiction() |>
@@ -121,12 +116,14 @@ depiction() |>
 ## Multiple Colors
 
 ```{r}
-mol       <- parse_smiles(paste("CC(n1c(C)ncc1c1ccnc(n1)Nc1ccc(cc1)S(=O)(=O)C)C", 
-                                "CMGC:CDC2:6gu3:A:FB8", sep=" "))
+mol <- parse_smiles(paste("CC(n1c(C)ncc1c1ccnc(n1)Nc1ccc(cc1)S(=O)(=O)C)C",
+  "CMGC:CDC2:6gu3:A:FB8",
+  sep = " "
+))
 
 # imid      <- 'c1cnc[nH]1'  #1H-imidazole
 highlight_imid <- match_smarts("c1cncn1", mol)
-highlight_2    <- match_smarts("n1cccnc1Nc2ccccc2", mol)
+highlight_2 <- match_smarts("n1cccnc1Nc2ccccc2", mol)
 
 color <- J("java.awt.Color")
 
@@ -148,11 +145,11 @@ depiction() |>
 
 ```{r}
 # laoding a molfile
-insulinmol <- system.file("molfiles/ChEBI_5931.mol", package="depict")
-insulin    <- read_mol(insulinmol)
+insulinmol <- system.file("molfiles/ChEBI_5931.mol", package = "depict")
+insulin <- read_mol(insulinmol)
 
 cysteine <- match_smarts("C(=O)C(CS)N", insulin)
-xlinks   <- match_smarts("SS", insulin)
+xlinks <- match_smarts("SS", insulin)
 
 depiction() |>
   set_size(700, 400) |>
@@ -163,6 +160,5 @@ depiction() |>
   depict(insulin) |>
   get_image() |>
   grid::grid.raster()
-
 ```
 

@@ -5,11 +5,11 @@
 #' @param jobj Required. A Java Object
 #' @param klass Required. A string defining a java class
 #' @return Boolean
-checkJavaClass <- function(jobj, klass ) {
+checkJavaClass <- function(jobj, klass) {
   if (is.null(attr(jobj, 'jclass'))) stop("this is not a Java Object")
 
-  for (k in klass ) {
-    if (attr(jobj, "jclass") == k) {
+  for (kl in klass) {
+    if (attr(jobj, "jclass") == kl) {
       return(TRUE)
     }
   }
