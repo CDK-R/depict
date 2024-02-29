@@ -40,8 +40,7 @@ checkJavaClass <- function(jobj, klass ) {
 atomcontainer_list_to_jarray <- function(atomcontainers) {
   
   new_array <-  .jnew('java.util.ArrayList')
-  
-  for (atmcntnr in atomcontainers) {
+  for (atmcntnr in as.list(atomcontainers)) {
     new_array$add(atmcntnr)
   }
   

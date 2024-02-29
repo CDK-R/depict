@@ -152,7 +152,7 @@ save_image <- function(molgrid, filepath) {
 #'
 get_image <- function(molgrid) {
   if (!checkJavaClass(molgrid, "org/openscience/cdk/depict/MolGridDepiction")) {
-    stop("highlight_atoms requires a Depiction Generator")
+    stop("get_image requires a Depiction Generator")
   }
 
   # CDK apends a ".png" to the name
