@@ -17,7 +17,6 @@ knitr::opts_chunk$set(
 
 knitr::opts_chunk$set(echo = TRUE)
 suppressMessages(library(depict))
-suppressMessages(library(magrittr))
 suppressMessages(library(grid))
 
 ```
@@ -30,16 +29,15 @@ A simple wrapper around cdk's excellent depict module.
 
 ```{r}
 library(depict)
-library(magrittr)
 
 # load a smiles string
 pen  <- parse_smiles("CC1(C(N2C(S1)C(C2=O)NC(=O)CC3=CC=CC=C3)C(=O)[O-])C penicillin")
 
 # `depiction` is the base class; styles are applied to it
 # `depict` applies the styles to the molecule
-depiction() %>%
-  depict(pen) %>%
-  get_image() %>%
+depiction() |>
+  depict(pen) |>
+  get_image() |>
   grid::grid.raster()
 ```
 
@@ -59,10 +57,10 @@ atmcontainers <-  purrr::map(
 many_containers <- atomcontainer_list_to_jarray(atmcontainers)
 
 
-depiction() %>%
-  set_zoom(10) %>%
-  depict(many_containers) %>%
-  get_image() %>%
+depiction() |>
+  set_zoom(10) |>
+  depict(many_containers) |>
+  get_image() |>
   grid::grid.raster()
 
 ```
@@ -88,16 +86,16 @@ bnds <- pen$bonds()
 lactam <- match_smarts("C1(=O)NCC1", pen)
 
 # use piping to change the behavior as desired
-depiction() %>%
-  highlight_atoms(atms, color$LIGHT_GRAY) %>%
-  highlight_atoms(bnds, color$LIGHT_GRAY) %>%
-  highlight_atoms(lactam, color$RED) %>%
-  set_size(400, 400) %>%
-  set_zoom(3) %>%
-  outerglow() %>%
-  add_title() %>%
-  depict(pen) %>%
-  get_image() %>%
+depiction() |>
+  highlight_atoms(atms, color$LIGHT_GRAY) |>
+  highlight_atoms(bnds, color$LIGHT_GRAY) |>
+  highlight_atoms(lactam, color$RED) |>
+  set_size(400, 400) |>
+  set_zoom(3) |>
+  outerglow() |>
+  add_title() |>
+  depict(pen) |>
+  get_image() |>
   grid::grid.raster()
 
 ```
@@ -110,13 +108,13 @@ depiction() %>%
 small_highlight <- match_smarts("C1CCC1", many_containers)
 
 depiction() %>%
-  highlight_atoms(small_highlight, color$RED) %>%
+  highlight_atoms(small_highlight, color$RED) |>
   set_size(400, 400) %>%
-  set_zoom(3) %>%
-  outerglow() %>%
-  add_title() %>%
-  depict(many_containers) %>%
-  get_image() %>%
+  set_zoom(3) |>
+  outerglow() |>
+  add_title() |>
+  depict(many_containers) |>
+  get_image() |>
   grid::grid.raster()
 ```
 
@@ -156,14 +154,14 @@ insulin    <- read_mol(insulinmol)
 cysteine <- match_smarts("C(=O)C(CS)N", insulin)
 xlinks   <- match_smarts("SS", insulin)
 
-depiction()%>% 
-  set_size(700, 400) %>%
-  set_zoom(10) %>%
-  outerglow() %>%
-  highlight_atoms(cysteine, color$YELLOW) %>%
-  highlight_atoms(xlinks, color$YELLOW) %>%
-  depict(insulin)%>%
-  get_image() %>%
+depiction() |>
+  set_size(700, 400) |>
+  set_zoom(10) |>
+  outerglow() |>
+  highlight_atoms(cysteine, color$YELLOW) |>
+  highlight_atoms(xlinks, color$YELLOW) |>
+  depict(insulin) |>
+  get_image() |>
   grid::grid.raster()
 
 ```
