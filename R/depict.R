@@ -97,13 +97,15 @@ depict <- function(dg, mol) {
     "org/openscience/cdk/AtomContainer",
     "org/openscience/cdk/AtomContainer2",
     "org/openscience/cdk/Reaction",
+    "org/openscience/cdk/ReactionSet",
     "org/openscience/cdk/silent/AtomContainer",
     "org/openscience/cdk/silent/AtomContainer2",
     "org/openscience/cdk/silent/IAtomContainer",
     "org/openscience/cdk/silent/Reaction",
+    "org/openscience/cdk/silent/ReactionSet",
     "java/util/ArrayList"
   ))) {
-    stop("depict requires an AtomContainer or an ArrayList of them")
+    stop("depict requires an AtomContainer, Reaction, ReactionSet, or an ArrayList of them")
   }
 
   # .jcall(dg, "Lorg/openscience/cdk/depict/Depiction;", "depict", mol)
@@ -159,7 +161,7 @@ get_image <- function(molgrid) {
     "org/openscience/cdk/depict/ReactionDepiction"
   ))) {
     print(.jclass(molgrid))
-    stop("get_image requires a Depiction Generator")
+    stop("get_image requires a Depiction")
   }
 
   # CDK apends a ".png" to the name
@@ -174,6 +176,28 @@ get_image <- function(molgrid) {
 
   img
 }
+
+#' get_svg_string
+#'
+#' @param molgrid Required. A MolGridDepiction. Usually obtained from
+#' the \code{depict} function.
+#' @returns an SVG string literal
+#' @export
+get_svg_string <- function(molgrid) {
+  if (!checkJavaClass(molgrid, c(
+    "org/openscience/cdk/depict/MolGridDepiction",
+    "org/openscience/cdk/depict/ReactionDepiction"
+  ))) {
+    print(.jclass(molgrid))
+    stop("get_image requires a Depiction")
+  }
+  
+  svg_str <- grid$toSvgStr()
+  svg_list <- strsplit(svg_str, "\n")[[1]]
+  # return the svg without the two header lines
+  paste(svg_list[3:length(svg_list)], collapse="\n")
+}
+
 
 #' set_zoom
 #'
