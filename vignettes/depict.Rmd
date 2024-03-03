@@ -26,7 +26,7 @@ suppressMessages(library(grid))
 A simple wrapper around cdk's excellent depict module.
 
 
-```{r}
+```{r, results='asis'}
 library(depict)
 
 # load a smiles string
@@ -36,8 +36,7 @@ pen <- parse_smiles("CC1(C(N2C(S1)C(C2=O)NC(=O)CC3=CC=CC=C3)C(=O)[O-])C penicill
 # `depict` applies the styles to the molecule
 depiction() |>
   depict(pen) |>
-  get_image() |>
-  grid::grid.raster()
+  get_svg_string()
 ```
 
 
@@ -45,7 +44,7 @@ depiction() |>
 
 # Multiple Smiles
 
-```{r}
+```{r, results='asis'}
 # load a few smiles as AtomContainers
 atmcontainers <- purrr::map(
   c("CCCC", "CCCCCC", "CCCC1CCC1CC2CCCC2"),
@@ -57,17 +56,16 @@ many_containers <- atomcontainer_list_to_jarray(atmcontainers)
 
 
 depiction() |>
-  set_zoom(10) |>
+  set_zoom(2) |>
   depict(many_containers) |>
-  get_image() |>
-  grid::grid.raster()
+  get_svg_string()
 ```
 
 
 
 # Use Colors, SMARTS, Highlighting
 
-```{r }
+```{r, results='asis'}
 # you must supply java colors
 color <- J("java.awt.Color")
 
@@ -87,35 +85,32 @@ depiction() |>
   highlight_atoms(atms, color$LIGHT_GRAY) |>
   highlight_atoms(bnds, color$LIGHT_GRAY) |>
   highlight_atoms(lactam, color$RED) |>
-  set_size(400, 400) |>
-  set_zoom(3) |>
+  #set_size(400, 400) |>
+  set_zoom(2) |>
   outerglow() |>
   add_title() |>
   depict(pen) |>
-  get_image() |>
-  grid::grid.raster()
+  get_svg_string()
 ```
 
 
 ##  SMARTS for highlighting mutiple containers
 
-```{r}
+```{r, results='asis'}
 small_highlight <- match_smarts("C1CCC1", many_containers)
 
 depiction() |>
   highlight_atoms(small_highlight, color$RED) |>
-  set_size(400, 400) |>
-  set_zoom(3) |>
+  set_zoom(2) |>
   outerglow() |>
   add_title() |>
   depict(many_containers) |>
-  get_image() |>
-  grid::grid.raster()
+  get_svg_string()
 ```
 
 ## Multiple Colors
 
-```{r}
+```{r, results='asis'}
 mol <- parse_smiles(paste("CC(n1c(C)ncc1c1ccnc(n1)Nc1ccc(cc1)S(=O)(=O)C)C",
   "CMGC:CDC2:6gu3:A:FB8",
   sep = " "
@@ -130,20 +125,18 @@ color <- J("java.awt.Color")
 depiction() |>
   highlight_atoms(highlight_imid, color$GREEN) |>
   highlight_atoms(highlight_2, color$RED) |>
-  set_size(400, 400) |>
-  set_zoom(4) |>
+  #set_size(400, 400) |>
+  #set_zoom(4) |>
   outerglow() |>
   add_title() |>
   depict(mol) |>
-  get_image() |>
-  grid::grid.raster()
+  get_svg_string()
 ```
 
 ## A Larger Example
 
 
-
-```{r}
+```{r, results='asis'}
 # laoding a molfile
 insulinmol <- system.file("molfiles/ChEBI_5931.mol", package = "depict")
 insulin <- read_mol(insulinmol)
@@ -152,13 +145,12 @@ cysteine <- match_smarts("C(=O)C(CS)N", insulin)
 xlinks <- match_smarts("SS", insulin)
 
 depiction() |>
-  set_size(700, 400) |>
-  set_zoom(10) |>
+  # set_size(700, 400) |>
+  set_zoom(0.7) |>
   outerglow() |>
   highlight_atoms(cysteine, color$YELLOW) |>
   highlight_atoms(xlinks, color$YELLOW) |>
   depict(insulin) |>
-  get_image() |>
-  grid::grid.raster()
+  get_svg_string()
 ```
 

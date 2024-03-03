@@ -192,7 +192,9 @@ get_svg_string <- function(molgrid) {
     stop("get_image requires a Depiction")
   }
   
-  svg_str <- grid$toSvgStr()
+  # svg_str <- grid$toSvgStr()
+  svg_str <- .jcall(molgrid, 'S' ,'toSvgStr')
+  
   svg_list <- strsplit(svg_str, "\n")[[1]]
   # return the svg without the two header lines
   paste(svg_list[3:length(svg_list)], collapse="\n")
