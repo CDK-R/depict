@@ -35,8 +35,10 @@ pen <- parse_smiles("CC1(C(N2C(S1)C(C2=O)NC(=O)CC3=CC=CC=C3)C(=O)[O-])C penicill
 # `depiction` is the base class; styles are applied to it
 # `depict` applies the styles to the molecule
 depiction() |>
+  set_zoom(2) |>
   depict(pen) |>
-  get_svg_string()
+  get_svg_string() |>
+  cat()
 ```
 
 
@@ -58,7 +60,8 @@ many_containers <- atomcontainer_list_to_jarray(atmcontainers)
 depiction() |>
   set_zoom(2) |>
   depict(many_containers) |>
-  get_svg_string()
+  get_svg_string() |>
+  cat()
 ```
 
 
@@ -66,6 +69,7 @@ depiction() |>
 # Use Colors, SMARTS, Highlighting
 
 ```{r, results='asis'}
+
 # you must supply java colors
 color <- J("java.awt.Color")
 
@@ -85,12 +89,12 @@ depiction() |>
   highlight_atoms(atms, color$LIGHT_GRAY) |>
   highlight_atoms(bnds, color$LIGHT_GRAY) |>
   highlight_atoms(lactam, color$RED) |>
-  #set_size(400, 400) |>
   set_zoom(2) |>
   outerglow() |>
   add_title() |>
   depict(pen) |>
-  get_svg_string()
+  get_svg_string() |>
+  cat()
 ```
 
 
@@ -105,7 +109,8 @@ depiction() |>
   outerglow() |>
   add_title() |>
   depict(many_containers) |>
-  get_svg_string()
+  get_svg_string() |>
+  cat()
 ```
 
 ## Multiple Colors
@@ -125,19 +130,20 @@ color <- J("java.awt.Color")
 depiction() |>
   highlight_atoms(highlight_imid, color$GREEN) |>
   highlight_atoms(highlight_2, color$RED) |>
-  #set_size(400, 400) |>
-  #set_zoom(4) |>
+  set_zoom(2) |>
   outerglow() |>
   add_title() |>
   depict(mol) |>
-  get_svg_string()
+  get_svg_string() |>
+  cat()
 ```
 
 ## A Larger Example
 
 
 ```{r, results='asis'}
-# laoding a molfile
+
+# loading a molfile
 insulinmol <- system.file("molfiles/ChEBI_5931.mol", package = "depict")
 insulin <- read_mol(insulinmol)
 
@@ -145,12 +151,12 @@ cysteine <- match_smarts("C(=O)C(CS)N", insulin)
 xlinks <- match_smarts("SS", insulin)
 
 depiction() |>
-  # set_size(700, 400) |>
   set_zoom(0.7) |>
   outerglow() |>
   highlight_atoms(cysteine, color$YELLOW) |>
   highlight_atoms(xlinks, color$YELLOW) |>
   depict(insulin) |>
-  get_svg_string()
+  get_svg_string() |>
+  cat()
 ```
 
