@@ -1,0 +1,162 @@
+---
+title: "Basic-Use"
+output: 
+  rmarkdown::html_vignette:
+      toc: true
+vignette: >
+  %\VignetteIndexEntry{Basic-Use}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+
+knitr::opts_chunk$set(echo = TRUE)
+suppressMessages(library(depict))
+suppressMessages(library(grid))
+```
+
+
+## Simple Depiction
+
+A simple wrapper around cdk's excellent depict module.
+
+
+```{r, results='asis'}
+library(depict)
+
+# load a smiles string
+pen <- parse_smiles("CC1(C(N2C(S1)C(C2=O)NC(=O)CC3=CC=CC=C3)C(=O)[O-])C penicillin")
+
+# `depiction` is the base class; styles are applied to it
+# `depict` applies the styles to the molecule
+depiction() |>
+  set_zoom(2) |>
+  depict(pen) |>
+  get_svg_string() |>
+  cat()
+```
+
+
+## Multiple Structure Depiction
+
+# Multiple Smiles
+
+```{r, results='asis'}
+# load a few smiles as AtomContainers
+atmcontainers <- purrr::map(
+  c("CCCC", "CCCCCC", "CCCC1CCC1CC2CCCC2"),
+  parse_smiles
+)
+
+# convert them into a java iterable
+many_containers <- atomcontainer_list_to_jarray(atmcontainers)
+
+
+depiction() |>
+  set_zoom(2) |>
+  depict(many_containers) |>
+  get_svg_string() |>
+  cat()
+```
+
+
+
+# Use Colors, SMARTS, Highlighting
+
+```{r, results='asis'}
+
+# you must supply java colors
+color <- J("java.awt.Color")
+
+# load in penicillin
+pen <- parse_smiles("CC1(C(N2C(S1)C(C2=O)NC(=O)CC3=CC=CC=C3)C(=O)[O-])C penicillin")
+cav <- parse_smiles("CN1C=NC2=C1C(=O)N(C(=O)N2C)C")
+
+# define the regions to highlight
+# either all atoms/bonds
+# or a SMARTS-defined subregion
+atms <- pen$atoms()
+bnds <- pen$bonds()
+lactam <- match_smarts("C1(=O)NCC1", pen)
+
+# use piping to change the behavior as desired
+depiction() |>
+  highlight_atoms(atms, color$LIGHT_GRAY) |>
+  highlight_atoms(bnds, color$LIGHT_GRAY) |>
+  highlight_atoms(lactam, color$RED) |>
+  set_zoom(2) |>
+  outerglow() |>
+  add_title() |>
+  depict(pen) |>
+  get_svg_string() |>
+  cat()
+```
+
+
+##  SMARTS for highlighting mutiple containers
+
+```{r, results='asis'}
+small_highlight <- match_smarts("C1CCC1", many_containers)
+
+depiction() |>
+  highlight_atoms(small_highlight, color$RED) |>
+  set_zoom(2) |>
+  outerglow() |>
+  add_title() |>
+  depict(many_containers) |>
+  get_svg_string() |>
+  cat()
+```
+
+## Multiple Colors
+
+```{r, results='asis'}
+mol <- parse_smiles(paste("CC(n1c(C)ncc1c1ccnc(n1)Nc1ccc(cc1)S(=O)(=O)C)C",
+  "CMGC:CDC2:6gu3:A:FB8",
+  sep = " "
+))
+
+# imid      <- 'c1cnc[nH]1'  #1H-imidazole
+highlight_imid <- match_smarts("c1cncn1", mol)
+highlight_2 <- match_smarts("n1cccnc1Nc2ccccc2", mol)
+
+color <- J("java.awt.Color")
+
+depiction() |>
+  highlight_atoms(highlight_imid, color$GREEN) |>
+  highlight_atoms(highlight_2, color$RED) |>
+  set_zoom(2) |>
+  outerglow() |>
+  add_title() |>
+  depict(mol) |>
+  get_svg_string() |>
+  cat()
+```
+
+## A Larger Example
+
+
+```{r, results='asis'}
+
+# loading a molfile
+insulinmol <- system.file("molfiles/ChEBI_5931.mol", package = "depict")
+insulin <- read_mol(insulinmol)
+
+cysteine <- match_smarts("C(=O)C(CS)N", insulin)
+xlinks <- match_smarts("SS", insulin)
+
+depiction() |>
+  set_zoom(0.7) |>
+  outerglow() |>
+  highlight_atoms(cysteine, color$YELLOW) |>
+  highlight_atoms(xlinks, color$YELLOW) |>
+  depict(insulin) |>
+  get_svg_string() |>
+  cat()
+```
+
