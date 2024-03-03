@@ -7,7 +7,7 @@
     <loc>/Readme.html</loc>
   </url>
   <url>
-    <loc>/articles/Basic-Use.html</loc>
+    <loc>/articles/depict.html</loc>
   </url>
   <url>
     <loc>/articles/index.html</loc>
@@ -47,6 +47,9 @@
   </url>
   <url>
     <loc>/reference/get_image.html</loc>
+  </url>
+  <url>
+    <loc>/reference/get_svg_string.html</loc>
   </url>
   <url>
     <loc>/reference/highlight_atoms.html</loc>

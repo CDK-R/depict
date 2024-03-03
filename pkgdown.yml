@@ -1,7 +1,7 @@
-pandoc: 2.19.2
-pkgdown: 2.0.6
+pandoc: 3.1.11
+pkgdown: 2.0.7
 pkgdown_sha: ~
 articles:
-  Basic-Use: Basic-Use.html
-last_built: 2022-11-23T01:06Z
+  depict: depict.html
+last_built: 2024-03-03T00:46Z
 
