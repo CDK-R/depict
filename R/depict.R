@@ -118,7 +118,7 @@ depict <- function(dg, mol) {
 #' Highlight atoms
 #'
 #' @param dg Required. A Depiction Generator
-#' @param highlights Required. A list of CDK IChemOjbects, usually atoms or bonds
+#' @param atoms Required. A list of CDK IChemOjbects, usually atoms or bonds
 #' @param color Required. A java.awt.Color
 #' @export
 highlight_atoms <- function(dg, atoms, color) {
@@ -152,7 +152,6 @@ save_image <- function(molgrid, filepath) {
 #'
 #' @param molgrid Required. A MolGridDepiction. Usually obtained from
 #' the \code{depict} function.
-#' @param outfile Required. Filepath to the output
 #' @importFrom png readPNG
 #' @export
 #'

@@ -11,7 +11,6 @@ License: LGPL
 LazyData: TRUE
 Depends:
     rJava (>= 1.0-11),
-    rcdk (>= 3.7),
     rcdklibs (>= 2.8)
 Imports:
     png
