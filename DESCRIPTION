@@ -5,8 +5,7 @@ Version: 0.4.0
 Authors@R: c(
   person('Zachary', 'Charlop-Powers', ,'zach.charlop.powers@gmail.com',role=c('cre'), 
       comment = c(ORCID = "0000-0001-8816-4680")))
-Description: Generate images of molecules using the Depiction API of  the 'Chemistry Development Kit'. 
-    CDK's Depict Api
+Description: Generate images of molecules using the Depiction API of  the 'Chemistry Development Kit'.
 License: LGPL
 LazyData: TRUE
 Depends:
@@ -19,7 +18,6 @@ Encoding: UTF-8
 URL: https://cdk-r.github.io/depict/
 Suggests: 
     knitr,
-    magrittr,
     rmarkdown,
-    testthat,
+    testthat
 VignetteBuilder: knitr

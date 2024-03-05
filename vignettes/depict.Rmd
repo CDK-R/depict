@@ -17,7 +17,6 @@ knitr::opts_chunk$set(
 
 knitr::opts_chunk$set(echo = TRUE)
 suppressMessages(library(depict))
-suppressMessages(library(grid))
 ```
 
 
@@ -48,7 +47,7 @@ depiction() |>
 
 ```{r, results='asis'}
 # load a few smiles as AtomContainers
-atmcontainers <- purrr::map(
+atmcontainers <- lapply(
   c("CCCC", "CCCCCC", "CCCC1CCC1CC2CCCC2"),
   parse_smiles
 )

@@ -4,6 +4,7 @@
 #'
 #' @export
 #' @import rJava
+#' @import rcdklibs
 depiction <- function() {
   .jnew("org/openscience/cdk/depict/DepictionGenerator")
 }
@@ -130,20 +131,20 @@ highlight_atoms <- function(dg, atoms, color) {
 
 #' save_image
 #'
-#' Highlight atoms
+#' save image to disk
 #'
 #' @param molgrid Required. A MolGridDepiction. Usually obtained from
 #' the \code{depict} function.
 #' @param outfile Required. Filepath to the output
 #' @export
-save_image <- function(molgrid, filepath) {
+save_image <- function(molgrid, outfile) {
   if (!checkJavaClass(molgrid, c(
     "org/openscience/cdk/depict/MolGridDepiction",
     "org/openscience/cdk/depict/ReactionDepiction"
   ))) {
     stop("highlight_atoms requires a Depiction Generator")
   }
-  molgrid$writeTo(filepath)
+  molgrid$writeTo(outfile)
 }
 
 #' get_image

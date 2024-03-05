@@ -1,8 +1,5 @@
 library("testthat")
 library("depict")
-library("magrittr")
-library("grid")
-
 
 context("Test Depiction")
 
@@ -22,7 +19,7 @@ test_that("we can depict a molecule", {
   expect_true(attr(pen, "jclass") %in% atomcontainerclasses)
   expect_true(attr(cav, "jclass") %in% atomcontainerclasses)
 
-  dep <- depiction() %>% depict(pen)
+  dep <- depiction() |> depict(pen)
   expect_equal(attr(dep, "jclass"), "org/openscience/cdk/depict/MolGridDepiction")
 
   img <- get_image(dep)
