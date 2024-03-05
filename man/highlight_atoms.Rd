@@ -9,9 +9,9 @@ highlight_atoms(dg, atoms, color)
 \arguments{
 \item{dg}{Required. A Depiction Generator}
 
-\item{color}{Required. A java.awt.Color}
+\item{atoms}{Required. A list of CDK IChemOjbects, usually atoms or bonds}
 
-\item{highlights}{Required. A list of CDK IChemOjbects, usually atoms or bonds}
+\item{color}{Required. A java.awt.Color}
 }
 \description{
 Highlight atoms

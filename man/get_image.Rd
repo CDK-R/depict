@@ -9,8 +9,6 @@ get_image(molgrid)
 \arguments{
 \item{molgrid}{Required. A MolGridDepiction. Usually obtained from
 the \code{depict} function.}
-
-\item{outfile}{Required. Filepath to the output}
 }
 \description{
 get image
