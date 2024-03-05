@@ -3,7 +3,7 @@ Type: Package
 Title: Draw Beautiful Molecular Structures
 Version: 0.4.0
 Authors@R: c(
-  person('Zachary', 'Charlop-Powers', ,'zach.charlop.powers@gmail.com',role=c('cre'), 
+  person('Zachary', 'Charlop-Powers', ,'zach.charlop.powers@gmail.com',role=c('cre', 'aut'), 
       comment = c(ORCID = "0000-0001-8816-4680")))
 Description: Generate images of molecules using the Depiction API of  the 'Chemistry Development Kit'.
 License: LGPL
