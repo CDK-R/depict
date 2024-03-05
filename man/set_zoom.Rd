@@ -11,6 +11,9 @@ set_zoom(dg, zoom = 1)
 
 \item{zoom}{Optional. Default \code{1}}
 }
+\value{
+DepictionGenerator
+}
 \description{
 set_zoom
 }

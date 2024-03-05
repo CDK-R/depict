@@ -9,6 +9,9 @@ color_atoms(dg)
 \arguments{
 \item{dg}{a CDK DepictionGenerator}
 }
+\value{
+DepictionGenerator
+}
 \description{
 set the atom color
 }

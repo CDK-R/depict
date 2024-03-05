@@ -5,6 +5,7 @@
 #' @param jobj Required. A Java Object
 #' @param klass Required. A string defining a java class
 #' @return Boolean
+#' @noRd
 checkJavaClass <- function(jobj, klass) {
   if (is.null(attr(jobj, 'jclass'))) stop("this is not a Java Object")
 
@@ -17,8 +18,6 @@ checkJavaClass <- function(jobj, klass) {
 }
 
 
-
-
 #' atomcontainer_list_to_jarray
 #'
 #'
@@ -27,10 +26,10 @@ checkJavaClass <- function(jobj, klass) {
 #' 
 #' @export
 #' @examples 
-#' \dontrun {
+#' \dontrun{
 #' 
 #' atmcontnrs <- purrr::map(
-#'      c("CCCCCC", "CCC1CCC1NC", "COCCOCCO")
+#'      c("CCCCCC", "CCC1CCC1NC", "COCCOCCO"),
 #'      parse_smiles)
 #'      
 #' atomcontainer_list_to_jarray(atmcontnrs)

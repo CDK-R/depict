@@ -13,6 +13,9 @@ set_size(dg, width, height)
 
 \item{height}{height  (int)}
 }
+\value{
+DepictionGenerator
+}
 \description{
 set_size
 }

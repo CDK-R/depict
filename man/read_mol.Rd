@@ -13,5 +13,5 @@ read_mol(molfile)
 an AtomContainer
 }
 \description{
-Read a Molfile and return an AtomContainer
+Read a Molfile and return an `AtomContainer`
 }

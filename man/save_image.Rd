@@ -4,7 +4,7 @@
 \alias{save_image}
 \title{save_image}
 \usage{
-save_image(molgrid, filepath)
+save_image(molgrid, outfile)
 }
 \arguments{
 \item{molgrid}{Required. A MolGridDepiction. Usually obtained from
@@ -13,5 +13,5 @@ the \code{depict} function.}
 \item{outfile}{Required. Filepath to the output}
 }
 \description{
-Highlight atoms
+save image to disk
 }

@@ -9,6 +9,9 @@ add_terminal_carbons(dg)
 \arguments{
 \item{dg}{a Depiction Generator}
 }
+\value{
+DepictionGenerator
+}
 \description{
 add terminal carbons
 }
