@@ -39,3 +39,4 @@ test_that("we can depict a moleculeset", {
   # expect_equal(svg, 'svg')
 
 })
+

@@ -18,8 +18,6 @@ checkJavaClass <- function(jobj, klass) {
 }
 
 
-
-
 #' atomcontainer_list_to_jarray
 #'
 #'

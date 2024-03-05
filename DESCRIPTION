@@ -18,6 +18,7 @@ Encoding: UTF-8
 URL: https://cdk-r.github.io/depict/
 Suggests: 
     knitr,
+    magrittr,
     rmarkdown,
-    testthat
+    testthat,
 VignetteBuilder: knitr
