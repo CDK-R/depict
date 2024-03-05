@@ -2,9 +2,9 @@
 #'
 #' create the CDK depiction object that can be manipulated
 #'
+#' @return DepictionGenerator
+#' @seealso \url{https://cdk.github.io/cdk/latest/docs/api/org/openscience/cdk/depict/DepictionGenerator.html}
 #' @export
-#' @import rJava
-#' @import rcdklibs
 depiction <- function() {
   .jnew("org/openscience/cdk/depict/DepictionGenerator")
 }
@@ -15,6 +15,7 @@ depiction <- function() {
 #'
 #' @param dg a CDK DepictionGenerator
 #' @seealso \url{https://cdk.github.io/cdk/latest/docs/api/org/openscience/cdk/depict/DepictionGenerator.html}
+#' @return DepictionGenerator
 #' @export
 color_atoms <- function(dg) {
   if (!checkJavaClass(dg, "org/openscience/cdk/depict/DepictionGenerator")) {
@@ -26,6 +27,7 @@ color_atoms <- function(dg) {
 #' outerglow
 #'
 #' @param dg a CDK Depiction Generator
+#' @return DepictionGenerator
 #' @seealso \url{https://cdk.github.io/cdk/latest/docs/api/org/openscience/cdk/depict/DepictionGenerator.html}
 #' @export
 outerglow <- function(dg) {
@@ -40,6 +42,7 @@ outerglow <- function(dg) {
 #' @param dg a CDK Depiction Generator
 #' @param width width (int)
 #' @param height height  (int)
+#' @return DepictionGenerator
 #' @seealso \url{https://cdk.github.io/cdk/latest/docs/api/org/openscience/cdk/depict/DepictionGenerator.html}
 #' @export
 set_size <- function(dg, width, height) {
@@ -53,6 +56,7 @@ set_size <- function(dg, width, height) {
 #' add_title
 #'
 #' @param dg a CDK  Depiction Generator
+#' @return DepictionGenerator
 #' @seealso \url{https://cdk.github.io/cdk/latest/docs/api/org/openscience/cdk/depict/DepictionGenerator.html}
 #' @export
 add_title <- function(dg) {
@@ -66,6 +70,7 @@ add_title <- function(dg) {
 #' add terminal carbons
 #'
 #' @param dg a Depiction Generator
+#' @return DepictionGenerator
 #' @seealso \url{https://cdk.github.io/cdk/latest/docs/api/org/openscience/cdk/depict/DepictionGenerator.html}
 #' @export
 add_terminal_carbons <- function(dg) {
@@ -85,9 +90,8 @@ add_terminal_carbons <- function(dg) {
 #'
 #' @param dg Required. A DepictionGenerator
 #' @param mol Required. An AtomContainer
-#' @seealso \url{https://cdk.github.io/cdk/latest/docs/api/org/openscience/cdk/depict/DepictionGenerator.html}
-#' @seealso \url{https://cdk.github.io/cdk/latest/docs/api/org/openscience/cdk/AtomContainer.html}
-#'
+#' @return A Depiction
+#' @seealso \url{https://cdk.github.io/cdk/latest/docs/api/org/openscience/cdk/depict/Depiction.html}
 #' @export
 depict <- function(dg, mol) {
   if (!checkJavaClass(dg, "org/openscience/cdk/depict/DepictionGenerator")) {
@@ -209,6 +213,7 @@ get_svg_string <- function(molgrid) {
 #'
 #' @param dg a Depiction Generator
 #' @param zoom Optional. Default \code{1}
+#' @return DepictionGenerator
 #' @export
 #'
 set_zoom <- function(dg, zoom = 1) {

@@ -9,6 +9,9 @@ outerglow(dg)
 \arguments{
 \item{dg}{a CDK Depiction Generator}
 }
+\value{
+DepictionGenerator
+}
 \description{
 outerglow
 }

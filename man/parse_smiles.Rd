@@ -14,6 +14,9 @@ to generate coordinates from the smiles}
 
 \item{kekulise}{Optional. Boolean. Default \code{TRUE}}
 }
+\value{
+an IAtomContainer
+}
 \description{
 simple smiles parser
 }

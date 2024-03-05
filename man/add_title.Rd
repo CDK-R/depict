@@ -9,6 +9,9 @@ add_title(dg)
 \arguments{
 \item{dg}{a CDK  Depiction Generator}
 }
+\value{
+DepictionGenerator
+}
 \description{
 add_title
 }
